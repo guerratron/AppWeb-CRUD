@@ -1,0 +1,346 @@
+//CARGA EL CSS AL VUELO AL IMPORTARLO
+(function () {
+    let head = document.querySelector("head");
+    let cssTable = document.createElement("link");
+    cssTable.setAttribute("type", "text/css");
+    cssTable.setAttribute("rel", "stylesheet");
+    cssTable.setAttribute("href", "table-matriz.css");
+    head.appendChild(cssTable);
+    /* //YA NO ES NECESARIO, SE HA INCLUIDO EN LA FUNCIÓN COModal
+    let cssModal = document.createElement("link");
+    cssModal.setAttribute("type", "text/css");
+    cssModal.setAttribute("rel", "stylesheet");
+    cssModal.setAttribute("href", "css/COModal.css");
+    head.appendChild(cssModal);
+    */
+})();
+//
+import {Registro} from "./Registro.js"
+
+const _JSON_DEFAULT2 = {
+    regs: [
+        {id: 0, nombre: "Angélica", apellido1: "García", apellido2: "López", telefono: "600000001", email: "angelica@dominio.com", notas: "Cliente inicial"},
+        {id: 1, nombre: "Aniceto", apellido1: "Cáceres", apellido2: "Díaz", telefono: "600000002", email: "aniceto@dominio.com", notas: "VIP"}
+    ]
+};
+
+/** Debe estar en coorcondancia con la BD */
+const _BD_FIELDS = ["id", "nombre", "apellido1", "apellido2", "email", "telefono", "fecha_alta", "notas"];
+
+/** Table - by GuerraTron-25,  
+ * Crea una Tabla HTML interactiva, con celdas editables con botoneras ... y muchas más características.  
+   `let table = new Table(this, this.options);`  
+   Donde "this" se corresponde con el objeto padre (seguramente el objeto ClientsAPI) y 
+   options son las opciones con un formato similar a: 
+   ```js
+   {
+       background: "#4CAF50"
+       style: "color: blue; font-size:smaller;",
+       json: _JSON_DEFAULT2
+   }
+    ```
+    Este objeto Table se ha diseñado para representar un listado de registros de una BD.  
+    Por eso tiene un array de hijos tipo "Registro" y "Fields"
+   
+    */
+export class Table{
+    "use strict";
+
+    static contador = 0; //variable estática
+
+    regs = [];
+    keys = _BD_FIELDS;
+    //rows = this.regs.length;
+    //cols = this.keys.length;
+    contTd=0; contTdf=0; contTh=0; contTrh=0; cont=0;
+    /** el array de celdas del body */
+    tds = [];
+    /** el array de celdas del foot == 1, el padre de "tdf" */
+    tdfs = [];
+    /** la celda que se corresponde con los mensajes (footer) */
+    tdf;
+    
+    //CLASE PRINCIPAL
+    /** Crea una Table HTML interactiva, con las celdas editables */
+    constructor(_parent, _options){
+        this.id = Table.contador++;
+        this.parent = _parent;
+        this.container = this.parent.table_container;
+        
+        this.callbackUpdate = function(e){ return e; };
+        this.thead, this.tbody, this.tfoot;
+        this.options = Object.assign({
+            background: "white", //"#4CAF50"
+            style: "",
+            json: _JSON_DEFAULT2
+        }, _options || {});
+        this.regs = this.options.json.regs;
+        
+        /*this.rows = this.options.json.regs.length;
+        if(this.rows > 0){
+            this.cols = Object.keys(this.options.json.regs[0]).length;
+            for(let key of Object.keys(this.options.json.regs[0])){
+                this.keys.push(key);
+            }
+        }*/
+
+        this.makeStructure(this.container);
+    }
+
+    numCols(){
+        return (this.regs.length > 0) ? Object.keys(this.regs[0]).length : 0;
+    }
+
+    /** Realiza la estructura principal de la Table. */
+    makeStructure(parent){
+        //console.log("makeStructure");
+        let _this = this;
+        //TABLA
+        this.el = document.createElement("table");
+        this.el.classList.add("table-matriz");
+        this.el.setAttribute("style", this.options.style);
+        //this.el.classList.add("table-black");
+        this.el.dataset.id = "table_" + this.id;
+        this.caption = document.createElement("caption");
+        this.caption.innerText = "Listado Clientes:";
+        this.el.appendChild(this.caption);
+        // CABECERA DE LA TABLA
+        this.thead = document.createElement("thead");
+        let trh = document.createElement("tr");
+        trh.dataset.id = this.contTrh++;
+        // 1º head vacia (para botón actions)
+        let th1 = document.createElement("th");
+        th1.innerHTML = "";
+        trh.appendChild(th1);
+        // siguientes head
+        this.keys.forEach((key)=>{
+            let th = document.createElement("th");
+            th.dataset.id = this.contTh++;
+            th.innerHTML = key;
+            trh.appendChild(th);
+        });
+        //una más para los botones
+        this.thead.appendChild(trh);
+        //CUERPO
+        this.tbody = document.createElement("tbody");
+        this.tbody.style.fontSize = "smaller";
+        for(let i=0; i < this.regs.length; i++){
+            /*this.regs.push(new Registro(this, {
+                background: "white",
+                style: "",
+                enable: true,
+                json: _this.options.json.regs[i]
+            }));*/
+            this.addReg(this.options.json.regs[i]);
+        }
+        //PIÉ
+        this.tfoot = document.createElement("tfoot");
+        this.createRowFoot(this.tfoot);
+        
+        this.el.appendChild(this.thead);
+        this.el.appendChild(this.tbody);
+        this.el.appendChild(this.tfoot);
+        
+        parent.appendChild(this.el);
+        this.update();
+        return this.el;
+    }
+    createRowFoot(parent){
+        this.trf = document.createElement("tr");
+            this.tdf = document.createElement("td");
+            this.tdf.dataset.id = this.contTdf++;
+            this.tdf.setAttribute("colspan", this.numCols()+1);
+            this.tdf.innerHTML = "Para editar celdas primero activarlas";
+            this.tdfs.push(this.tdf);
+        this.trf.appendChild(this.tdf);
+        this.trf.setAttribute("colspan", this.numCols()+1);
+        parent.appendChild(this.trf);
+    }
+
+    /** CUIDADO: Se recreará de nuevo toda la estructura para refrescar los datos */
+    recreate(){
+        this.container.removeChild(this.el);
+        this.makeStructure(this.container);
+    }
+    /** CUIDADO: Se reseteará todo (vacío) y se recreará de nuevo toda la estructura para refrescar los datos */
+    reset(){
+        this.regs = [];
+        this.recreate();
+    }
+
+    /** Tiene que comprobar campos ÚNICOS para evitar duplicidades (por defecto "id" e "email") */
+    allowReg(jsonReg, uniqueFields = ["id", "email"]){
+        let check1 = false; //jsonReg.id <= this.options.json.regs.length ? 
+        this.regs.forEach((reg)=>{
+            //console.log(reg);
+            uniqueFields.forEach((key) => {
+                check1 = check1 || (reg[key] == jsonReg[key]);
+                //console.log("allowReg: " + reg.key, check1);
+            });
+        });
+        return !check1;
+    }
+    addReg(jsonReg){
+        if(!this.allowReg(jsonReg)){ return false; }
+        console.log("allowReg: " + jsonReg.id, true);
+        this.regs.push(new Registro(this, {
+            background: "white",
+            style: "",
+            enable: true,
+            json: jsonReg
+        }));
+        this.tdf.setAttribute("colspan", this.numCols() + 1);
+        this.trf.setAttribute("colspan", this.numCols() + 1);
+        //this.recreate();
+    }
+
+    setOk(json) {
+        this.parent.setOk(json);
+    }
+    setDelete(id) {
+        this.parent.setDelete(id);
+    }
+ 
+    setSelected(trueFalse) {
+        this.regs.forEach((reg) => {
+            reg.setSelected(trueFalse);
+        });
+        //this.selected = trueFalse;
+        this.update();
+    }
+    setEnable(trueFalse) {
+        this.regs.forEach((reg) => {
+            reg.setEnable(trueFalse);
+        });
+        this.enable = trueFalse;
+        this.update();
+    }
+    /** Se borrará el valor que se haya establecido en este elemento. */
+    clean() {
+        this.regs.forEach((reg) => {
+            reg.clean();
+        });
+        this.update();
+    };
+    remove() {
+        this.regs.forEach((reg) => {
+            //reg.remove();
+        });
+        this.update();
+    };
+
+    setMsg(msg, style = "background: whiteSmoke; color: #333;"){
+        this.tdf.innerHTML = msg;
+        this.tdf.setAttribute("style", style);
+    }
+
+    update() {
+        this.regs.forEach((reg) => {
+            reg.update();
+        });
+        console.log(" 'Table_" + this.id + "' UPDATED!!");
+    };
+
+
+
+    /** Muestra un 'Confirm' para seleccionar el origen de los datos. Presenta la opción de importar desde las COOKIES o desde FILE.
+      *  - COOKIES: Los datos se importarán desde las cookies si están activadas, sinó se intentarán importar desde el 'localStorage'. 
+      *  - FILE:    Intentará importar datos desde un archivo js en el directorio 'data' con el nombre de la tabla. */
+    _import = function _innerImport(){
+        let _this = this;
+        const name_table = "table_" + this.id;
+        const str = `Seleccionar el origen de los datos. <br />
+        Presenta la opción de importar desde las COOKIES, desde el TEXTAREA o desde FILE.
+        <ul style="font-size: smaller; background: #333; color: silver;">
+            <li>COOKIES: Los datos se importarán desde las cookies si están activadas, sinó se intentarán importar desde el 'localStorage'.</li>
+            <li>VALUES:  Leerá los datos desde el 'textarea'; éstos deben cumplir el formato de la variable 'arrValues'. 
+            Sólo afectará al BODY de la tabla</li>
+            <li>FILE:    Intentará importar datos desde un archivo js en el directorio 'data' con el nombre de la tabla.</li>
+        </ul>`;
+        
+        function _fromArrValues(ev){
+            //console.log("_fromArrValues");
+            let textArea = _this.dialog.querySelector('textarea');
+            let txtArrValues = textArea.value;
+            console.log(txtArrValues);
+            if(txtArrValues){
+                try{
+                    _this.importFromArrValues(JSON.parse(txtArrValues));
+                }catch(e){
+                    console.warn('Table.import()->ERROR IN JSON-PARSE', e);
+                }
+            }
+        }
+        function _fromTextArea(ev){ //prompt
+            //prompt
+            //console.log("_fromTextArea");
+            //let txtArrValues = ev.target.value;
+            //console.log(txtArrValues);
+            //_this.update();
+        }
+        
+        _this.showDialog(
+            {
+                title: "Table-" + this.id + ": IMPORT FROM COOKIE / VALUES / FILE?", 
+                body: "<p>" + str
+            },
+            {
+                okTxt: "from Cookie", 
+                cancelTxt: "from File", 
+                neutralTxt: "from Values", 
+                promptTxt: "...",
+                okC: _this.importFromCookies.bind(_this), 
+                cancelC: _this.importFromFile.bind(_this), 
+                neutralC: _fromArrValues,
+                promptC: _fromTextArea
+            },
+            {showClose: true}     
+        );
+    };
+    
+    
+    /** Se rellenan los datos con el array pasado. */
+    importFromArrValues = function _innerImportFromArrValues(arrValues){
+        let _this = this;
+        function _toError(msg, _note){
+            msg = msg || "";
+            _note = _note || "";
+            _this.showDialog(
+                {title: "ERROR EN TABLE.IMPORTFROMARRVALUES()", body: msg, note: _note},
+                {},
+                {color: "red"}     
+            );
+        }
+        //BODY
+        if(arrValues && (arrValues.length > 0)){
+            //console.log(arrValues, arrValues.length, this.rows, arrValues[0].length, this.cols);
+            if((arrValues.length !== this.rows) || (arrValues[0].length !== this.cols)){
+                _toError(
+                    "El array de valores no se corresponde con la estructura de la tabla. Filas y Columnas NO COINCIDEN.",
+                    "Asegurese de que los datos pasados tengan el mismo número de filas y columnas que la tabla!!"
+                );
+                return;
+            }
+            let cont = 0;
+            for(let i=0; i < this.rows; i++){
+                for(let j=0; j < this.cols; j++){
+                    let value = arrValues[i][j];
+                    this.tds[cont].innerText = value;
+                    cont++;
+                }
+            }
+            this.update();
+        }else{ 
+            //console.warn("ERROR EN TABLE.importFromArrValues(): El array pasado parece no estar bien construido.");
+            _toError(
+                "El array pasado parece no estar bien construido.",
+                "Asegurese de que los datos pasados tengan el mismo número de filas y columnas que la tabla!!"
+            );
+            return;
+        }
+        this.update;
+    }
+    
+}
+
+window["Table"] = Table;
