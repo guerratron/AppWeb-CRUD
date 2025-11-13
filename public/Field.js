@@ -4,18 +4,23 @@
    let field1 = new Field("#elem", 4, 3, {type: "string", background: "#4CAF50"}); "*/
 export class Field{
     static contador = 0; //variable estática
+
+    lastValue = "";
     
     //CLASE PRINCIPAL
     /** Crea un Field de un Registro de la BD, asociado a un elemento HTML.
      * Se supone que el _parent será un objeto "Registro" que contendrá un elmento "tr" 
      * de una tabla al que se le entregará como hijo el elemento (this.el) creado por esta 
      * clase [un elemento "td"]
+     * 
+     * Utiliza el objeto VAL del script "validation.js", debe estar cargado con anterioridad
      */
     constructor(_parent, _name, _value, _options){
         this.parent = _parent;
         this.container = _parent.el;
-        this.name = _name || "n?";
+        this.name = _name || "";
         this.value = (typeof _value) == "undefined" ? "": _value;
+        
         this.options = Object.assign({
             type: "text",
             style: "",   //["red", "green", "blue", "gray", "black", "yellow", "purple", "pastel"]
@@ -25,6 +30,15 @@ export class Field{
         this.id = this.options.id;
         this.type = this.options.type;
         this.enable = this.options.enable;
+
+
+        if (["nombre", "apellido1", "apellido2", "email"].includes(this.name)) {
+            this.value = VAL.check(this.name, _value);
+            if(!this.value){
+                alert(`necesita introducir un valor válido para "${this.name}" =  "${this.value}" del registro "${this.id}"`);
+            }
+        }
+        this.lastValue = this.value;
         
         this.el = this.makeStructure();
     }
@@ -51,7 +65,18 @@ export class Field{
                 this.input.style.width = "65%";
             }
             this.input.addEventListener("change", ()=>{
-                this.value = this.input.value;
+                // se difieren las acciones para no ralentizar el evento "change"
+                setTimeout(()=>{
+                    if (["nombre", "apellido1", "apellido2", "email"].includes(this.name)) {
+                        this.value = VAL.check(this.name, this.input.value);
+                        if (!this.value) {
+                            alert(`Valor para "${this.name}" del registro "${this.id}" NO VÁLIDO!`);
+                            this.input.value = this.lastValue;
+                        }
+                    }
+                    this.value = this.input.value;
+                    this.lastValue = this.value;
+                }, 200);
             });
             this.input.addEventListener("focus", () => {
                 this.input.classList.add("field-input-selected");

@@ -182,7 +182,7 @@ export class Table{
     }
     addReg(jsonReg){
         if(!this.allowReg(jsonReg)){ return false; }
-        console.log("allowReg: " + jsonReg.id, true);
+        //console.log("allowReg: " + jsonReg.id, true);
         this.regs.push(new Registro(this, {
             background: "white",
             style: "",

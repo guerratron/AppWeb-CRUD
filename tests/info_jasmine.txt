@@ -1,0 +1,48 @@
+describe(string, function): Agrupa pruebas relacionadas. Recibe una cadena de texto descriptiva y una función que contiene las pruebas (it).
+
+it(string, function): Define un caso de prueba individual. Describe qué se está probando con una cadena de texto y contiene el código de la prueba.
+
+expect(value).matcher(expectedValue): Es el corazón de una prueba. Se utiliza para hacer una afirmación sobre un valor. El método toBe es un ejemplo de un matcher que verifica la igualdad.
+
+beforeEach(function) y afterEach(function): Se ejecutan antes (beforeEach) y después (afterEach) de cada caso de prueba (it) dentro de su bloque describe.
+
+beforeAll(function) y afterAll(function): Se ejecutan una vez, antes (beforeAll) y después (afterAll) de todas las pruebas de un bloque describe.
+
+Mocks y Spies: Permiten simular dependencias externas para probar el código de forma aislada. Los spies rastrean llamadas a funciones y pueden modificar su comportamiento sin afectar la implementación real.
+
+
+expect(valorActual).matcher(valorEsperado);
+MATCHERs:
+
+// Verifica si ambos valores son iguales.
+expect(x).toEqual(y);
+
+// Verifica si ambos objetos son el mismo.
+expect(x).toBe(y);
+
+// Verifica si el valor cumple con el patrón establecido.
+expect(x).toMatch(pattern);
+
+// Verifica si el valor está definido.
+expect(x).toBeDefined();
+
+// Verifica si el valor es indefinido.
+expect(x).toBeUndefined();
+
+// Verifica si el valor es nulo.
+expect(x).toBeNull();
+
+// Verifica si el valor es verdaderamente "truthy" (true, no cero, no nulo, etc.).
+expect(x).toBeTruthy();
+
+// Verifica si el valor es falsamente "falsy" (false, 0, '', null, undefined, NaN).
+expect(x).toBeFalsy();
+
+// Verifica si el valor actual contiene el valor esperado (utilizado para arrays o strings).
+expect(x).toContain(y);
+
+// Verifica si el valor actual es menor que el valor esperado.
+expect(x).toBeLessThan(y);
+
+// Verifica si el valor actual es mayor que el valor esperado.
+expect(x).toBeGreaterThan(y);

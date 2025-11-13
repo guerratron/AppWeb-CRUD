@@ -3,7 +3,8 @@
     let head = document.querySelector("head");
     let script = document.createElement("script");
     script.setAttribute("type", "text/javascript");
-    script.setAttribute("src", "Table.js");
+    script.setAttribute("defer", true);
+    script.setAttribute("src", "validation.js");
     head.appendChild(script);
 })();*/
 
@@ -89,19 +90,44 @@ export class ClientsAPI{
                 this.formAdd.notas.value = "";
                 this.setList();
             });
+            //return false;
+            Array.from(this.formAdd.elements).forEach((f)=>{
+                if(["nombre", "apellido1", "apellido2", "email"].includes(f.id)){
+                    f.addEventListener("change", () => {
+                        // se difieren las acciones para no ralentizar el evento "change"
+                        setTimeout(() => {
+                            let value = VAL.check(f.id, f.value);
+                            if (!value) {
+                                alert(`💥 Valor para "${this.name}" NO VÁLIDO!`);
+                                f.value = "";
+                            }
+                        }, 200);
+                    });
+                }
+            });
             // route + submit
             this.formAdd.action = `${protocol}://${host}:${port}/${path}clients.php`;//?action=add&`;
             this.btnSubmit = this.formAdd.submit;
             this.btnSubmit.addEventListener("click", (ev) => {
                 ev.stopPropagation();
                 ev.preventDefault();
-                console.log("se envía a Ajax añadiendole la queryString");
-                const datosFormulario = new FormData(this.formAdd);
-                if (this.chkSearch.checked) {
-                    console.log(this.datosFormulario, UTILS.formData2json(datosFormulario));
-                    this.setSearch(UTILS.formData2json(datosFormulario));
-                } else { //`${this.formAdd.action}?action=insert`
-                    this.setInsert(UTILS.formData2json(datosFormulario));
+                let _stop = false;
+                Array.from(this.formAdd.elements).forEach((f) => {
+                    if (["nombre", "apellido1", "apellido2", "email"].includes(f.id)) {
+                        if(!f.value){ _stop = true; }
+                    }
+                });
+                if(!_stop){
+                    console.log("se envía a Ajax añadiendole la queryString");
+                    const datosFormulario = new FormData(this.formAdd);
+                    if (this.chkSearch.checked) {
+                        console.log(this.datosFormulario, UTILS.formData2json(datosFormulario));
+                        this.setSearch(UTILS.formData2json(datosFormulario));
+                    } else { //`${this.formAdd.action}?action=insert`
+                        this.setInsert(UTILS.formData2json(datosFormulario));
+                    }
+                }else{
+                    alert(`💥 Comprobar Valores. Alguno Requerido Vacío!`);
                 }
             });
         }
