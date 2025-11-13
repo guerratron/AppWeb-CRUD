@@ -1,0 +1,8 @@
+# crear / clonar repositorio (yo lo he hopedado en GitHub, por lo tanto lo he clonado vacío)
+"git init" o "git clone https://github.com/guerratron/AppWeb-CRUD.git"
+# crear una etiqueta anotada inicial
+git tag -a v0.1.0 -m "Inicio de la primera version de la app-web con CRUD"
+# subir la etiqueta al repositorio remoto
+git push origin v0.1.0
+# o subir todas las etiquetas
+git push origin --tags

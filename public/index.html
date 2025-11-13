@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta language="es-ES">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <!-- Etiqueta de compatibilidad, fuerza a IE a utilizar el último motor de renderizado 
+         Se puede borrar si se utiliza mejor el '.htaccess'
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> -->
+        <meta name="author" content="Juanjo Guerra - dinertron@gmail.com - guerraTron-18">
+        <title>Gestor de clientes (CRUD) — Entrega v0.2.0</title>
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <script type="module" src="api.js"></script>
+    </head>
+
+    <body>
+        <h1>Gestor de clientes (CRUD) — Entrega v0.2.0</h1>
+
+        <header>
+            <img id="logo" src="logo_mini.png" alt="logo" title="Logo de 'Una Web-Empresarial Cualquiera'" /> 
+            <div id="breadcrumbs">
+                <hr style="font-size:xx-small; line-height: 0.2em;" />
+                <i>BREADCRUMBS</i>: &emsp; | &emsp; <span>&#x1F3E0; Home</span> | &emsp; <span>🔑 Clients</span>
+                <hr style="font-size:xx-small; line-height: 0.2em;" />
+            </div>
+        </header>
+
+        <main>
+            <h2>ÁREA ADMINISTRADOR <span>🔒 backend</span></h2>
+            <p>🔒 Este área debería estar protegida con contraseña y ser de acceso restringido, sólo accesible por personal autorizado para administrar la gestión de clientes de la empresa.</p>
+            <h4>&#x1F4F0; Clientes</h4>
+            <p>Gestión de clientes: alta, baja, modificación y listado </p>
+            <!-- Buttons
+            <div class="group">
+                <p class="buttons-bar">
+                    <form action="clients.php" method="POST">
+                        <button id="btnAdd" class="form-btn" title="Alta de cliente">&#x1F4F0; ✔️</button>
+                        <button id="btnRemove" class="form-btn" title="Baja de cliente">&#x1F4F0; <a href="client_remove.html">❌</a></button>
+                        <button id="btnList" class="form-btn" title="Listar / Modificar">&#x1F4F0; <a href="client_list.html">👁️</a></button>
+                    </form>
+                </p>
+            </div> -->
+            <!-- Form -->
+            <!-- PRIMERA VALIDADCIÓN A TRAVÉS DE HTML5, el atributo 'required' -->
+            <div class="group">
+                <h5 style="margin:2px; padding:0;">Formulario Alta / Búsqueda:</h5>
+                <form id="formAdd" action="no_valida" method="POST"><!-- http://localhost:8282/clients.php -->
+                    <p style="font-size:smaller; color: gray; margin:2px;">Caracteres permitidos: letras incluyendo ñ, acentos o guiones. Campos Obligatorios 'resaltados'</p>
+                    <input type="text" id="nombre" name="nombre" class="form-input" placeholder="Nombre de usuario" title="Nombre (*)" required />
+                
+                    <input type="text" id="apellido1" name="apellido1" placeholder="1º Apellido" class="form-input" title="Apellido 1 (*)" required />
+
+                    <input type="text" id="apellido2" name="apellido2" placeholder="2º Apellido" class="form-input" title="Apellido 2 (*)" required />
+
+                    <input type="text" id="telefono" name="telefono" placeholder="Teléfono" class="form-input" title="Teléfono" />
+
+                    <input type="email" id="email" name="email" class="form-input" placeholder="email válido" title="Email (*)" required />
+
+                    <textarea id="notas" name="notas" class="form-input" placeholder="alguna anotación reseñable" title="Notas" rows="2"></textarea>
+
+                    <blockquote>
+                        <label for="chkSearch" title="Seleccionar el checkbox para búsqueda de clientes" style="display:inline-block; max-width: 100px; cursor:pointer;" onmouseover="this.style.fontSize = 'larger';" onmouseleave="this.style.fontSize = 'smaller';">🔎 Buscar: </label>
+                        <input type="checkbox" id="chkSearch" name="chkSearch" class="form-input" title="Buscar Clientes por nombre, apellidos o email" style="cursor:pointer;" />
+                        <button id="btnClean" name="btnClean" class="form-btn btn-orange" title="Resetea campos y búsquedas" style="margin:0; margin-left:25px;">❌ Remove Search</button>
+                        <!--<input id="action" name="action" type="hidden" value="add" />-->
+                        <input class="form-btn" name="submit" type="submit" value="&#x26A1; ADD / Search" style="float:right;" title="Añadir o Buscar Cliente" />
+                    </blockquote>
+                </form>
+            </div>
+
+            <div id="containerEditTable" class="group">
+            </div>
+        </main>
+
+        <footer>
+            <blockquote>
+                <hr />
+                <sup>13-11-25 - </sup> 
+                <span>pequeña muestra para el <b>IECA</b></span> 
+                <sub><small>by Juanjo Guerra</small></sub> 
+                <button class="form-btn btn-orange">
+                    <!--<a href="downloads/Suscribe.zip" download="Suscribe.zip" title="Descargar el proyecto comprimido en zip y leer el README.md">&#x21E9; ZIP</a>-->
+                    <a href="downloads_handler.php" 
+                        title="Descargar el proyecto comprimido en zip y leer el README.md">&#x21E9; ZIP</a>
+                </button>
+            </blockquote>
+        </footer>
+
+        <script>
+            //API
+            let chkSearch, telefono, notas, api, containerEditTable;
+            document.addEventListener("DOMContentLoaded", function(){
+                containerEditTable = document.querySelector("#containerEditTable");
+                
+                let opts = {
+                    background: "white",
+                    style: "",
+                    formAdd: document.querySelector("#formAdd"),
+                    json: {
+                        regs: [
+                            /*{ id: 0, nombre: "Angélica2", apellido1: "García", apellido2: "López", telefono: "600000001", email: "angelica@dominio.com", notas: "Cliente inicial" },
+                            { id: 1, nombre: "Aniceto", apellido1: "Cáceres", apellido2: "Díaz", telefono: "600000002", email: "aniceto@dominio.com", notas: "VIP" }*/
+                        ]
+                    }
+                };
+                api = new ClientsAPI(containerEditTable, opts);
+            });
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,238 @@
+div[class^="container-table"]{
+    min-width: 25%;
+    min-height: 240px;
+    background: whiteSmoke;
+    overflow-x: auto;
+    float: left;
+}
+table.table-matriz{
+    border-spacing: 2px;
+    width: 98%;
+    min-height: 150px;
+    text-align: center;
+    vertical-align: middle;
+    padding: 4px;
+    margin: auto;
+    background:lightYellow;
+}
+table.table-matriz, table.table-matriz th, table.table-matriz td{
+    border: 1px solid whiteSmoke;
+    font-size: 0.7rem;
+}
+table.table-matriz input{
+    height: 25px;
+    border: 1px solid orange;
+    font-size: smaller;
+}
+table.table-matriz tr{
+    height: 25px;
+    min-height: 15px;
+}
+table.table-matriz tr:hover{
+    background-color: yellow;
+}
+table.table-matriz tr:nth-child(even) {
+    background-color: #f2f2f2AA;
+}
+table.table-matriz th, table.table-matriz td{
+    border-bottom: 1px solid #AAAAAA;
+}
+table.table-matriz td{
+    background: #FFFFFF;
+    opacity: 0.7;
+}
+table.table-matriz td:hover{
+    cursor: text;
+    opacity: 1;
+}
+table.table-matriz th{
+    background: silver;
+    text-transform: uppercase;
+    cursor: text;
+}
+
+table.table-matriz .field-input.enabled{
+    outline: 1px solid red;
+}
+table.table-matriz .field-input-selected{
+    outline: 1px solid green !important;
+    background-color: #222222;
+    color: whiteSmoke;
+}
+
+table.table-matriz tfoot td{
+    background: antiqueWhite;
+    font-style: italic;
+}
+
+table.table-matriz .close-table{
+    padding: 2px;
+    margin-right: 6px;
+    float: right;
+    color: fireBrick;
+    text-shadow: 1px 1px 1px white;
+    font-weight: bolder;
+    opacity: 0.8;
+    cursor:pointer;
+}
+table.table-matriz .close-table:hover{
+    color: red;
+    opacity: 1;
+}
+textarea.introTextTH{
+    opacity: 0.5;
+    background: #AAAAAA;
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    z-index: 1000;
+}
+textarea.introTextTH:hover{
+    opacity: 1;
+}
+textarea.introTextTD{
+    opacity: 0.5;
+    background: yellow;
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    z-index: 1000;
+}
+textarea.introTextTD:hover{
+    opacity: 1;
+}
+textarea.introTextTDF{
+    opacity: 0.5;
+    background: lightGreen;
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    z-index: 1000;
+}
+textarea.introTextTDF:hover{
+    opacity: 1;
+}
+button.table-import-button, button.table-save-button, button.table-clean-button{
+    position: relative;
+    margin: auto;
+    cursor: pointer;
+    margin-top: 2%;
+    margin-left: 4%;
+}
+button.table-import-button{
+    background: mediumSlateBlue;
+    color: white;
+}
+button.table-import-button:hover{
+    background: slateBlue;
+    color: white;
+}
+button.table-save-button{
+    background: CornflowerBlue;
+    color: white;
+}
+button.table-save-button:hover{
+    background: DodgerBlue;
+    color: white;
+}
+button.table-clean-button{
+    background: Crimson;
+    color: white;
+}
+button.table-clean-button:hover{
+    background: fireBrick;
+    color: white;
+}
+
+/*BEGIN: STYLE*/
+table.table-red{
+    background:lightCoral;
+}
+table.table-red th{
+    background:coral;
+    color: white;
+}
+table.table-red tfoot td{
+    background:lightSalmon;
+}
+table.table-green{
+    background:lightGreen;
+}
+table.table-green th{
+    background:green;
+    color: white;
+}
+table.table-green tfoot td{
+    background:olive;
+}
+table.table-blue{
+    background:lightBlue;
+}
+table.table-blue th{
+    background:navy;
+    color: white;
+}
+table.table-blue tfoot td{
+    background:aquamarine;
+}
+table.table-gray{
+    background:lightGray;
+}
+table.table-gray th{
+    background:gray;
+    color: white;
+}
+table.table-gray tfoot td{
+    background:silver;
+}
+table.table-black{
+    background:#222222;
+    color: black;
+    font-weight: bolder;
+}
+table.table-black th{
+    background: black;
+    color: white;
+}
+table.table-black tfoot td{
+    background: #555555;
+    color: whiteSmoke;
+}
+table.table-yellow{
+    background:yellow;
+}
+table.table-yellow th{
+    background: peru;
+    color: white;
+}
+table.table-yellow tfoot td{
+    background: navajoWhite;
+}
+table.table-purple{
+    background:royalBlue;
+}
+table.table-purple th{
+    background: rebeccaPurple;
+    color: white;
+}
+table.table-purple tfoot td{
+    background: orchid;
+}
+table.table-pastel{
+    background:mediumSeaGreen;
+}
+table.table-pastel th{
+    background: LightSteelBlue;
+    color: white;
+}
+table.table-pastel tfoot td{
+    background: mediumTurquoise;
+}
+/*END: STYLE*/
+
+.hidden{
+    display: none;
+}
+.show{
+    display: block;
+}
