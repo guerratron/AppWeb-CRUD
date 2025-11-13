@@ -115,27 +115,28 @@ v0.3.0
  - Preparado para **LOCAL** y **ONLINE**
  - Añadido un botón de descargas que bajará el proyecto completo en **zip**
  - Algún trabajo extra adicional como la **optimización** de las pocas imágenes que implementa, creación de un zip con el proyecto al completo.
- - Unos `45 Kbts` de código
+ - Unos `52 Kbts` de código en `public/` y `18 Kbts` en `src/` sin contar README ni imágenes.
+ - Por último todos los archivos de texto se han guardado con codificación estándar `UTF-8 no-BOM`.
 
 ## 🔧-ResumenDeUso
-El archivo de entrada `index.html` muestra una pseudo-web con un enlace para suscribirse a las **Newsletters**
+El archivo de entrada `index.html` muestra una pseudo-web que rerpresenta la parte **administrativa** de una supuesta empresa, donde se muestran dos formularios: 
+ - Uno para dar de **Alta** y **búsqueda** de clientes.
+ - Otro que muestra el **Listado** (con botones de accción) de los clientes previamente registrados. 
 
-Al pulsarlo se abrirá el formulario de suscripción donde hay que introducir los tres campos obligatorios: `nombre, apellido e email`, puede seleccionarse el checkbox para anular la suscripción o no. Después pulsar el 
-botón **Enviar**.
+Al dar de alta algún cliente (rellenando los campos obligatorios) se refrescará el listado de forma automática.
+Este formulario permite también la búsqueda por `nombre, apellidos e email` marcando el checkbox correspondiente. Los resultados se mostrarán en el listado, para volver a visualizarlos todos pulsar el botón de `Limpiar Búsqueda`.
 
-Si todo ha salido satisfactorio se habrá insertado un registro en la *BD* donde se llevará el control de los usuarios suscritos a los *newsletters*.
-
-Si algo falla se mostrarán otras webs con mensajes informativos y un enlace **HOME** para regresar a la principal.
+Tanto si las acciones se cumplen satisfactoriamente o no, se mostrará un pequeño mensaje en el pié del formulario.
 
 ## ⚙️-Desarrollo
 
-No he podido dedicarle más que unas cuantas horas en estos dos días, así que no se podían hacer grandes cosas, pero he intentado que haya una muestra variada sobre programación de tecnologías web, tanto en local (con **XAMPP**) como en servidor, aplicando *buenas prácticas*.
+No he podido dedicarle más que unas cuantas horas en estos 5 días por problemas familiares, así que no se podían hacer grandes cosas, pero he intentado cumplir lo solicitado en el PDF y que haya una muestra variada sobre programación de tecnologías web, tanto en local (con **WamppServer**) como en servidor, aplicando *buenas prácticas de programación*.
 
 La monté en **local** y tras sucesivos tests prueba-error me decidí a montarla también **online**.
 
 Para esto contraté un hosting en "*infinityFree*" y subí los mismos archivos que en local, sólo tube que realizar modificaciones en los datos de conexionado a la *BD* y algún pequeño ajuste más.
 
-Puede verse montada a modo de prueba en: <https://guerratron.kesug.com/>
+Puede verse montada a modo de prueba en: <https://appcrud.kesug.com/>
 
 ## 💥-PruebasUnitarias
 Ejecutadas pruebas unitarias con **jasmine** al código *js* a través del archivo `tests/jasmine/SpecRunner_validation.js.html`. Este script lo he preparado específicamente para este proyecto y 
