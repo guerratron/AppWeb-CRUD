@@ -3,9 +3,13 @@ Cambios importantes en estructura de archivos, se ha completado la parte BACKEND
 La app se ha probado en servidor LOCAL con dos variantes:
  - xampp v3.2.2.0 (versión muy antígua) Problemas con PHP v5.4.0
  - GoLive (plugin VSC) - La parte de cliente (HTML, Javascript)
- - wamppServer v3.3.7 - (Apache 2.4.62.1, PHP 8.3.14, MySQL 9.1.0)
+ - wamppServer v3.3.7 - (Apache 2.4.62.1, PHP 8.3.14, MySQL 9.1.0) Es el que finalmente se ha utilizado.
 
- todavía faltan pruebas unitarias y documentación
+El control de versiones se ha realizado tanto en Git como en GitHub
+ - Git GUI v0.21 (Git v2.16.2) Bastante antígua, el **repositorio** y las **tags** se ha creado inicialmente con este.
+ - GitHub Desktop (current version) Se han continuado el resto de trabajos de **pull-request** y **commit** con este.
+
+ PENDIENTE: Todavía faltan pruebas unitarias y documentación
 
 # BD: (MySQL->MariaDB > v8.0.13)
 Se ha mantenido la tabla sugerida pero se le ha modificado ligeramente la estructura con algunas salvedades:
@@ -48,10 +52,12 @@ De todas formas todas las acciones retornan un objeto con dos campos: `{"regs": 
  - regs: Un array con los todos los clientes (excepto **search** que retorna sólo los que cumplan la condición)
  - error: {String} Si no está vacío es que ha ocurrido algún tipo de aviso o anomalía al realizar la consulta, no tiene porqué ser un error, símplemente que no haya encontrado los datos a buscar.
 
-# COMPLETIONS
+# PENDIENTE
  - Implementar más páginas (Home, Contact, ..)
  - corregir algunos efectos visuales como el campo "notas" que no queda muy bién.
  - teminar de aplicar más clases y efectos CSS del archivo "table-matriz.css" que no ha dado tiempo de implementar.
  - Incluir paginación
  - Invertigar la posibilidad de reconstruir todos los id de clientes en la BD sin reordenación ni cambio de fechas.
  - Optimizaciones y mejoras de código
+ - Todavía faltan pruebas unitarias y documentación
+
