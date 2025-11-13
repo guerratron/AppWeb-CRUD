@@ -6,7 +6,7 @@
 > Web:     https://guerratron.kesug.com/  
 > License: Free BSD. & Open GPL v.3. Keep credit, please.  
 > Idea Original: **Juan J. Guerra Haba**  
-> Versión: 0.1.0  
+> Versión: 0.3.0  
 > Proyect:    PHP+MySQL Javascript &emsp; Package: WebAppCRUD.zip &emsp; Main Class: clientes.php  
 > 
 > ----------------------------------------------------------------------------------------------------  
@@ -28,87 +28,15 @@
 - [🎁 Agradecimientos](#🎁-agradecimientos)
 - [✒️ Credits](#✒️-credits)
 
-<p style="display:none;">📋 🔧 ⌨️ ⌨ 🖮  ⚙️ 🚀 📌 ✒️ 🎁  ⎃ ⌂ ☗ 🏠︎ 🏚️ 🏠 ♥ ❤ ❤️ 💖 ★ ⍟ ✨ ⭐ ⭕ 
-〽️ ♯ ☑️ ✔️ ✓ ✗ ✖️ ❌ ❗ ❕ ❓ ❔ ⍰ ⯑ 🛈 ⚠ ⚠️ ⚿ ⛔︎ ⛔ 💣 🎈 🔡 🔣
-‖ ” „ ƒ ∀ ⌬ ∅ ♖ ♜ 🏆︎ 🏆 🎰 🎮 🎖 🎖️ 🏅
-🜉 ⌁ ⭍ 🗲 🗱 ⚡ ⍾ ⏚ ⏛ ⏦ 〰 ♒︎ ☁  ➕ ➖
-⌛︎ ⏳︎ ∵ ⛬ 🝆 ⋙ ⭆ ⟹ ⇨ ⊳ ⌲ ➤ ⬀ 🔝 ∭ ↺ ⮔ 🔄 ∾ ∞ ⋈ ♾ ⊕ ⊚ ⌾ 🞇 ⬤ ⏺ ⚫︎ 🞑 🅢 🆂 Ⓢ 🅂 ╬ ⋮ Ξ π ω Ω ⅏ 🀰 🙼 🙾 
-⛿ ⚐ ⚑ ⛳︎ 🏳️ 🏴 🏷️ ⚒ 🛠 ⚒️ ⚙ ⛯ ⛓ ⛓️ 🔗 ⛶ ⯐ ✉ ✉️ 📧 🌍︎ 🌍 ✎ ❒ 𝄝 𝄜 🎵 ☺ ☻ ☹ 👤 👦 💥 💤
-🜲 🌡 🎚 🎚️ 📷︎ 📷 👁 👁️ 👀 📤︎ 📥︎ 🔓︎ 🔒 🔑 🕨 🕪 🔇 🔈 🔊 🕭 🔔 🔕 🕮 📖 🖋 🖈 📌 📎 📏 🖑 🖫 💾 🗎 📄 🗀 🗁 🗑 🗓 📆 📅 
-📟 🗗 🗠 📈 📊 🗩 💬 📦 💯 🔋 🔎</p>
-<style>
-    blockquote{
-        text-align: center;
-    }
-    .info{
-        background:lightBlue;
-        color: #333333;
-    }
-    .alert{
-        border-radius: 6px;
-        font-size: 0.6em;
-        color: blue;
-        background: navajoWhite;
-        padding: 10px;
-    }
-    .green{
-        color: navy;
-        background: lightGreen;
-    }
-    .preview{
-        width: 100%;
-        cursor: pointer;
-    }
-    .mini-preview{
-        width: 25%;
-        cursor: pointer;
-    }
-    .bg-SERVICER{
-        border-radius: 10px;
-        padding: 5px;
-        margin: 5px;
-        color: lightBlue;
-        background: navy;
-    }
-    .bg-SERVICER>ul>li>i, .bg-FREEDER>ul>li>i{
-        background-color: lemonchiffon;
-        color: red;
-        padding: 0 4px;
-        margin-right: 5px;
-        line-height: 1.3em;
-    }
-    .bg-FREEDER{
-        border-radius: 10px;
-        padding: 5px;
-        margin: 5px;
-        color: lime;
-        background: darkgreen;
-    }
-    .float-left{
-        float: left;
-    }
-    .clearfix{
-        clear: both;
-    }
-    .small{
-        font-size: x-small;
-        color: gray;
-    }
-    h1{
-        text-align:center;
-    }
-    h2>span{
-        float:left;
-    }
-</style>
 
 # 📖-TITULO_y_DESCRIPCION
-<img class="logo" src="./public/favicon.ico" title="logo" /> Gestor de clientes (CRUD) v0.1.0 <span class="small">by [GuerraTron-25][authorEmail]</span>
+<img class="logo" src="./public/favicon.ico" title="logo" /> Gestor de clientes (CRUD) v0.3.0 <span class="small">by [GuerraTron-25][authorEmail]</span>
 
-Entrega v0.1.0 Aplicación mínima para alta, baja, modificación y listado de clientes en MySQL.  
+Entrega v0.3.0 Aplicación mínima para alta, baja, modificación y listado de clientes en MySQL.  
 
 <pre>
-Esta <i>mini-app</i> o <b>mini-portal-web</b> se ha desarrollado a modo de muestra para las <b>evaluaciones de certificación de profesionalidad</b> de desarrollo de apps web del <b>IECA</b>.
+Esta <i>mini-app</i> o <b>mini-portal-web</b> se ha desarrollado a modo de muestra para las 
+<b>evaluaciones de certificación de profesionalidad</b> de desarrollo de apps web del <b>IECA</b>.
 
 Se ha montado y probado tanto en <i>LOCAL</i> como en <i>SERVER</i> y funciona bien.
 </pre>
@@ -124,19 +52,27 @@ LADO SERVIDOR:
 mostrar a través de diferentes páginas html una salida exitosa o no.
 
 
-<p class="alert orange">ATENCIÓN: 🔒 Esta página debería estar protegida con contraseña y ser de acceso restringido, sólo accesible por personal autorizado para administrar la gestión de clientes de la empresa</p>
+<pre>ATENCIÓN: 🔒 Esta página debería estar protegida con contraseña y ser de acceso restringido, 
+sólo accesible por personal autorizado para administrar la gestión de clientes de la empresa</pre>
 
 ## 🏷️-REQUISITOS
  - Opción A (PHP): PHP 8.x, Apache/Nginx, MySQL 8.x, extensión PDO.
+ - Un navegador compatible con estándares HTML5 (ej. Chrome, Firefox, ..) y motor javascript actual (ES6 es suficiente)
 
 ### Instalación (4–6 pasos numerados)  
-1) Crear BD: mysql -u root -p < db.sql 
-2) PHP: copiar src/ a tu servidor y apuntar el DocumentRoot a public/ 
-3) Abrir http://localhost:8080 (o el puerto que indiques) y probar.
-4) Interactuar con el formulario de registro y consulta de clientes.
+1. <del>Crear BD: mysql -u root -p < db.sql</del>  
+    **NO ES NECESARIO, HE INCLUIDO EN PHP LA AUTO-GESTIÓN DE LA B.D.**  
+    Tan sólo habría que incluir las **CLAVES** correspondientes en el archivo **src/bd_config.php**
+2. PHP: copiar src/ a tu servidor y apuntar el DocumentRoot a public/ 
+3. Abrir http://localhost:8080 (también la he probado en http://127.0.0.1:5500/public/) y probar.
+4. Interactuar con el formulario de **Alta** y consulta de **clientes**.
 
 ## 🗁-Estructura_De_Carpetas
-2–5 líneas explicando qué hay en src/, public/, etc.
+Se ha separado la estructura en dos carpetas:
+ - `public/` : Contiene todo el código que administra la parte **cliente** con archivos **html, js y css**.  
+     También contiene otros archivos como un mínimo de imágenes. 
+ - `src/` : Aquí va todo el código que administra el servidor, controla los verbos **CRUD** para la base  
+    de datos y algún archivo de utilidad. Todo son archivos **php**
 
 ## Control_de_Versiones
 ### Tag (etiquetas de version) y release notes (notas de versión):  
@@ -148,6 +84,10 @@ Se ha utilizado Git para crear el repositorio y llevar el control y numeración 
  `git tag -a v0.1.0 -m "Inicio de la primera version de la app-web con CRUD"`
  - subir la etiqueta al repositorio remoto  
  `git push origin v0.1.0` ó todas las etiquetas `git push origin --tags`
+ - a partir de aquí se ha seguido trabajando con **GitHub-Desktop** conjuntamente con **Git**, 
+    creado otras **tags** en otra **rama** (ESTRUCTURA-II).
+ - Finalmente el proyecto acabado se ha **fusionado** en la rama **master** que puede visualizarse online en: 
+    `https://github.com/guerratron/AppWeb-CRUD` así como las distintas **tags** y se puede descargar el **tarball** de su **Release**
 
 ### Modelo de release notes (Un resumen breve (4 ó 5 líneas) de qué incluye esa versión y cómo afecta al despliegue):
 v0.1.0 
@@ -210,13 +150,13 @@ verifica multitud de variaciones de entradas a los campos del formulario, tanto 
 ## ⌨️-Preview
 
 <blockquote>
-    <img class="mini-preview" src="./preview1.png" title="click for preview" onclick="this.classList.toggle('mini-preview'); this.classList.toggle('preview');" />
-    <img class="mini-preview" src="./preview2.png" title="click for preview" onclick="this.classList.toggle('mini-preview'); this.classList.toggle('preview');" />
+    <img class="mini-preview" src="./public/preview1.png" title="click for preview" onclick="this.classList.toggle('mini-preview'); this.classList.toggle('preview');" />
+    <img class="mini-preview" src="./public/preview2.png" title="click for preview" onclick="this.classList.toggle('mini-preview'); this.classList.toggle('preview');" />
 </blockquote>
 
 ## 🚀-Aviso
 
-<p style="font-size:x-large;">Esto sólo es una pequeña demostración, no una app real.</p>
+<pre>Esto sólo es una pequeña demostración, no una app real.</pre>
 
 ## ✨-Mejoras
 Podrían añadirse muchas mejoras, añadir más bloques de contenido, insertar etiquetas semánticas, hacerla responsive, mejorar el estilo y la maquetación, aplicar efectos CSS3, ...
@@ -239,7 +179,7 @@ Por supuesto muchísimas gracias también a los asesores que he tenido durante l
 ---
 ⌨️ con ❤️ por [Juan José Guerra][GuerraTron-Github] 😊
 
-[<b style="font-size:xx-large; margin-left:50%;">🔝</b>](#top)
+[<b style="font-size:xx-large; margin-left:50%;" title="ir al inicio">🔝</b>](#top)
 
 <!-- REFERENCIAS -->
 [authorEmail]: mailto:dinertron@gmail.com
