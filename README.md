@@ -86,15 +86,16 @@ Se ha utilizado Git para crear el repositorio y llevar el control y numeración 
  `git push origin v0.1.0` ó todas las etiquetas `git push origin --tags`
  - a partir de aquí se ha seguido trabajando con **GitHub-Desktop** conjuntamente con **Git**, 
     creado otras **tags** en otra **rama** (ESTRUCTURA-II).
- - Finalmente el proyecto acabado se ha **fusionado** en la rama **master** que puede visualizarse online en: 
+ - Finalmente el proyecto acabado se ha **fusionado** en la rama **master** en su versión **v0.3.0** que puede visualizarse online en:  
     `https://github.com/guerratron/AppWeb-CRUD` así como las distintas **tags** y se puede descargar el **tarball** de su **Release**
 
 ### Modelo de release notes (Un resumen breve (4 ó 5 líneas) de qué incluye esa versión y cómo afecta al despliegue):
-v0.1.0 
- - CRUD mínimo de clientes (crear, listar con búsqueda, modificar, borrar). 
+v0.3.0 
+ - CRUD+ ampliado de clientes (crear, listar con búsqueda, modificar, borrar). 
  - Validación de email y control de duplicados. 
- - Script db.sql con datos de ejemplo. 
+ - Script db.sql con datos de ejemplo. (No necesario, *lo auto-gestiona* php) 
  - README de instalación y api.md con ejemplos.
+ - DEMO en vivo en https://
 
 -----------
 -----------
