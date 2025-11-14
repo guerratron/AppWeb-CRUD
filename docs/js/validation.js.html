@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: validation.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: validation.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** Valida los campos esperados de nombre, apellido e email.
+ * @param n {string} El nombre de usuario
+ * @param a {string} Primer Apellido
+ * @param e {string} Un email válido
+ * @param a2 {string} Último Apellido
+ * @param isRun {boolean} Permite ejecutar esta función en entornos de pruebas unitarias (como jasmine)
+ * @return {boolean} true/false en función de la validez de los datos.
+ */
+let _isOK = function __isOK(n, a, e, a2, isRun = true) {
+    //console.log(n, typeof n === "string", a, e);
+    if (!n || !a || !a2 || !e || (typeof n !== 'string') || (typeof a !== 'string') || (typeof a2 !== 'string') || (typeof e !== 'string')) {
+        return false;
+    }
+    //console.log(n, a, a2, e);
+    n = n.trim();
+    a = a.trim();
+    a2 = a2.trim();
+    e = e.trim().toLowerCase();
+    // 1. Expresión regular para validar cualquier nombre o apellido (incluyendo ñ, acentos o guiones)
+    const na = /^([A-Za-zÑñÁáÉéÍíÓóÚú]+[\'\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+)(\s+([A-Za-zÑñÁáÉéÍíÓóÚú]+[\'\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+))*$/;
+    // 3. Validar campos vacíos
+    if (!n || (n.length &lt; 2) || !na.test(n)) {
+        if (isRun) {
+            let nombre = _getElementByVal(n);
+            alert('Nombre Usuario: Revisar caracteres permitidos.');
+            if(nombre){ nombre.focus(); }
+        }
+        return false; // Detener la función si hay un error
+    }
+
+    if (!a || (a.length &lt; 2) || !na.test(a)) {
+        if (isRun) {
+            let apellido = _getElementByVal(a);
+            alert('Apellido 1: Revisar caracteres permitidos.');
+            if(apellido){ apellido.focus(); }
+        }
+        return false;
+    }
+    
+    if (!a2 || (a2.length &lt; 2) || !na.test(a2)) {
+        if (isRun) {
+            let apellido2 = _getElementByVal(a2);
+            alert('Apellido 2: Revisar caracteres permitidos.');
+            if(apellido2){ apellido2.focus(); }
+        }
+        return false;
+    }
+
+    // 4. Expresión regular para validar un formato de email básico
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(e)) {
+        if (isRun) {
+            let email = _getElementByVal(e);
+            alert('El formato del correo electrónico no es válido.');
+            if(email){ email.focus(); }
+        }
+        return false;
+    }
+    return true; //n &amp;&amp; a &amp;&amp; e;
+}
+
+/** Busca un input del formulario por su valor introducido */
+function _getElementByVal(value){
+    Array.from(document.querySelectorAll("input")).forEach((el)=>{
+        if(el.value == value){ return el; }
+    });
+    return null;
+}
+
+/** va llamando a la función __isOK con valores con un sólo valor, el resto preparados.
+ * Sólo válido para nombre definidos en variable "valsDef"
+ */
+function _check(name, value){
+    let valsDef = {nombre: "nombre", apellido1: "apell", apellido2: "apellido", email: "a@b.c"};
+    valsDef[name] = value;
+    if(!_isOK(valsDef.nombre, valsDef.apellido1, valsDef.email, valsDef.apellido2)){
+        value = "";
+    }
+    return value;
+}
+
+//Exporta al entorno global el namespace "VAL" con funciones de validación
+ window["VAL"] = {
+     isOK: _isOK,
+     check: _check,
+     getElementsByVal: _getElementByVal
+ };
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ClientsAPI_ClientsAPI.html">ClientsAPI</a></li><li><a href="Field_Field.html">Field</a></li><li><a href="Registro_Registro.html">Registro</a></li><li><a href="Table.html">Table</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_BD_FIELDS">_BD_FIELDS</a></li><li><a href="global.html#_JSON_DEFAULT1">_JSON_DEFAULT1</a></li><li><a href="global.html#_check">_check</a></li><li><a href="global.html#_formData2json">_formData2json</a></li><li><a href="global.html#_getElementByVal">_getElementByVal</a></li><li><a href="global.html#_isEmailOK">_isEmailOK</a></li><li><a href="global.html#_isOK">_isOK</a></li><li><a href="global.html#_isTxtOK">_isTxtOK</a></li><li><a href="global.html#_json2QueryString">_json2QueryString</a></li><li><a href="global.html#_json2formData">_json2formData</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Fri Nov 14 2025 16:44:20 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -93,7 +93,7 @@ La api se compone de diferentes archivos js escritos en forma de módulos:
  - `conex_conf.js`: Se ha utilizado js pero es básicamente un archivo con las CLAVES de conexionado con el servidor (protocol, host, port, path). Se importa y utiliza al inicio de la **API** y es muy importante asegurarse que se conecta al servidor correcto en función del que hayamos montado en LOCAL.
 
  ## STYLES
- La API utiliza otros archivos para dar estilo a las tablas y elementos formados, como `table-matriz.css` o alguna imágen pequeña.
+ La **API** utiliza otros archivos para dar estilo a las tablas y elementos formados, como `table-matriz.css` o alguna imágen pequeña. También utiliza **mediaquery** para el redimensionado de textos en algunos campos.
 
  De todas formas para aligerar contenido gráfico todos los iconos se utilizan en formato texto `unicode`, utilizando `html-entities`
 
@@ -109,6 +109,11 @@ La monté en **local** y tras sucesivos tests prueba-error me decidí a montarla
 Para esto contraté un hosting en "*infinityFree*" y subí los mismos archivos que en local, sólo tube que realizar modificaciones en los datos de conexionado a la *BD* y algún pequeño ajuste más.
 
 Puede verse montada a modo de prueba en: <https://appcrud.kesug.com/>
+
+## 📖-DOCUMENTACION
+Como se comentó en el `README.md` todos los scripts tanto en `html, css, javascript como en php` tienen líneas de comentario explicando su funcionalidad, también se ha creado este **README** y el **api.md**. Como colofón final también se ha incluido documentación en la carpeta `docs`, esta documentación sobre los archivos php se ha incluido en la ruta: `/docs/api/index.html` la cual se ha generado con `phpDocumentor 3.8.1`.
+
+También se ha documentado el código de las clases js creadas, se encuentra todo en la carpeta `docs/js/index.html`, todo ello generado con `jsDoc`.
 
 ## 💥-PruebasUnitarias
 Ejecutadas pruebas unitarias con **jasmine** al código *js* a través del archivo `tests/jasmine/SpecRunner_validation.js.html`. Este script lo he preparado específicamente para este proyecto y 

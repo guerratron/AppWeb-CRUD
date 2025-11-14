@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1><i style="display:none;">TOP</i></h1>
+<blockquote>
+<hr>
+<p><a href="https://guerratron.kesug.com/" title="Página de prueba"><img src="./public/logo_mini.png" alt="logo" title="Página de prueba"></a><br>
+'<strong>PHP+MySQL</strong>' (PHP Web-APP)  -  App mínima para alta, baja, modificación y listado de clientes en MySQL.<br>
+Author:  Juan José Guerra Haba - <a href="mailto:dinertron@gmail.com">dinertron@gmail.com</a>  -  Nov, 2025<br>
+Web:     https://guerratron.kesug.com/<br>
+License: Free BSD. &amp; Open GPL v.3. Keep credit, please.<br>
+Idea Original: <strong>Juan J. Guerra Haba</strong><br>
+Versión: 0.3.0<br>
+Proyect:    PHP+MySQL Javascript   Package: WebAppCRUD.zip   Main Class: clientes.php</p>
+<hr>
+</blockquote>
+<h3>🏠︎ Tabla de contenidos 🖇️</h3>
+<ul>
+<li><a href="#%F0%9F%93%96-titulo_y_descripcion">📖 Título y Descripción</a></li>
+<li><a href="#%F0%9F%8F%B7%EF%B8%8F-requisitos">🏷️ Requisitos</a></li>
+<li><a href="#%F0%9F%97%81-estructura_de_carpetas">🗁 Estructura de Carpetas</a></li>
+<li><a href="#%F0%9F%93%8B-caracteristicas">📋 Características</a></li>
+<li><a href="#%F0%9F%94%A7-resumendeuso">🔧 Resumen De Uso</a></li>
+<li><a href="#%E2%9A%99%EF%B8%8F-desarrollo">⚙️ Desarrollo</a></li>
+<li><a href="#%F0%9F%92%A5-pruebasunitarias">💥 Pruebas Unitarias</a></li>
+<li><a href="#%E2%8C%A8%EF%B8%8F-preview">⌨️ Preview</a></li>
+<li><a href="#%F0%9F%9A%80-aviso">🚀 Aviso</a></li>
+<li><a href="#%E2%9C%A8-mejoras">✨ Mejoras</a></li>
+<li><a href="#%F0%9F%8C%8D-paquete">🌍 Paquete</a></li>
+<li><a href="#%F0%9F%93%8B-license">📄 License</a></li>
+<li><a href="#%F0%9F%8E%81-agradecimientos">🎁 Agradecimientos</a></li>
+<li><a href="#%E2%9C%92%EF%B8%8F-credits">✒️ Credits</a></li>
+</ul>
+<h1>📖-TITULO_y_DESCRIPCION</h1>
+<p><img class="logo" src="./public/favicon.ico" title="logo" /> Gestor de clientes (CRUD) v0.3.0 <span class="small">by <a href="mailto:dinertron@gmail.com">GuerraTron-25</a></span></p>
+<p>Entrega v0.3.0 Aplicación mínima para alta, baja, modificación y listado de clientes en MySQL.</p>
+<pre>
+Esta <i>mini-app</i> o <b>mini-portal-web</b> se ha desarrollado a modo de muestra para las 
+<b>evaluaciones de certificación de profesionalidad</b> de desarrollo de apps web del <b>IECA</b>.
+
+Se ha montado y probado tanto en <i>LOCAL</i> como en <i>SERVER</i> y funciona bien.
+</pre>
+<p>No se pretende programar un sitio completo, más bien un pequeño esbozo que muestre un poco la programación en <code>HTML, CSS, Javascript, PHP Y SQL</code>.</p>
+<p>LADO CLIENTE:<br>
+Se trata de una <em>web ficticia</em> que tiene un formulario de <strong>gestión de clientes</strong> y donde puede verse un listado y realizar una serie de acciones.<br>
+También podrá visualizarse el resultado de cada acción de forma asíncrona con llamadas a través de AJAX.</p>
+<p>LADO SERVIDOR:<br>
+<em>PHP</em> controla la parte de conexionado con la <strong>Base de Datos</strong> y sus consultas a través de acciones <strong>CRUD</strong> (Create-Remove-Update-Delete), para realizar las acciones solicitadas o retornar valores.
+mostrar a través de diferentes páginas html una salida exitosa o no.</p>
+<pre>ATENCIÓN: 🔒 Esta página debería estar protegida con contraseña y ser de acceso restringido, 
+sólo accesible por personal autorizado para administrar la gestión de clientes de la empresa</pre>
+<h2>🏷️-REQUISITOS</h2>
+<ul>
+<li>Opción A (PHP): PHP 8.x, Apache/Nginx, MySQL 8.x, extensión PDO.</li>
+<li>Un navegador compatible con estándares HTML5 (ej. Chrome, Firefox, ..) y motor javascript actual (ES6 es suficiente)</li>
+</ul>
+<h3>Instalación (4–6 pasos numerados)</h3>
+<ol>
+<li><del>Crear BD: mysql -u root -p &lt; db.sql</del><br>
+<strong>NO ES NECESARIO, HE INCLUIDO EN PHP LA AUTO-GESTIÓN DE LA B.D.</strong><br>
+Tan sólo habría que incluir las <strong>CLAVES</strong> correspondientes en el archivo <strong>src/bd_config.php</strong></li>
+<li>PHP: copiar src/ a tu servidor y apuntar el DocumentRoot a public/</li>
+<li>Abrir http://localhost:8080 (también la he probado en http://127.0.0.1:5500/public/) y probar.</li>
+<li>Interactuar con el formulario de <strong>Alta</strong> y consulta de <strong>clientes</strong>.</li>
+</ol>
+<h2>🗁-Estructura_De_Carpetas</h2>
+<p>Se ha separado la estructura en dos carpetas:</p>
+<ul>
+<li><code>public/</code> : Contiene todo el código que administra la parte <strong>cliente</strong> con archivos <strong>html, js y css</strong>.<br>
+También contiene otros archivos como un mínimo de imágenes.</li>
+<li><code>src/</code> : Aquí va todo el código que administra el servidor, controla los verbos <strong>CRUD</strong> para la base<br>
+de datos y algún archivo de utilidad. Todo son archivos <strong>php</strong></li>
+<li><code>test</code>: Esta carpeta no cuenta, es sólo para uso interno, no es necesaria en el lanzamiento. Aquí residen los test de pruebas unitarias realizados con <strong>jasmine</strong></li>
+<li><code>docs</code>: documentación de la <strong>API</strong></li>
+</ul>
+<h2>Control_de_Versiones</h2>
+<h3>Tag (etiquetas de version) y release notes (notas de versión):</h3>
+<p>Se ha utilizado Git para crear el repositorio y llevar el control y numeración de versiones utilizando los siguientes comandos:</p>
+<ul>
+<li>crear &quot;git init&quot; | clonar &quot;git clone&quot; repositorio (yo lo he hospedado en GitHub, por lo tanto lo he clonado vacío)<br>
+<code>git clone https://github.com/guerratron/AppWeb-CRUD.git</code></li>
+<li>crear una etiqueta anotada inicial<br>
+<code>git tag -a v0.1.0 -m &quot;Inicio de la primera version de la app-web con CRUD&quot;</code></li>
+<li>subir la etiqueta al repositorio remoto<br>
+<code>git push origin v0.1.0</code> ó todas las etiquetas <code>git push origin --tags</code></li>
+<li>a partir de aquí se ha seguido trabajando con <strong>GitHub-Desktop</strong> conjuntamente con <strong>Git</strong>,
+creado otras <strong>tags</strong> en otra <strong>rama</strong> (ESTRUCTURA-II).</li>
+<li>Finalmente el proyecto acabado se ha <strong>fusionado</strong> en la rama <strong>master</strong> en su versión <strong>v0.3.0</strong> que puede visualizarse online en:<br>
+<code>https://github.com/guerratron/AppWeb-CRUD</code> así como las distintas <strong>tags</strong> y se puede descargar el <strong>tarball</strong> de su <strong>Release</strong></li>
+</ul>
+<h3>Modelo de release notes (Un resumen breve (4 ó 5 líneas) de qué incluye esa versión y cómo afecta al despliegue):</h3>
+<p>v0.3.0</p>
+<ul>
+<li>CRUD+ ampliado de clientes (crear, listar con búsqueda, modificar, borrar).</li>
+<li>Validación de email y control de duplicados.</li>
+<li>Script db.sql con datos de ejemplo. (No necesario, <em>lo auto-gestiona</em> php)</li>
+<li>README de instalación y api.md con ejemplos.</li>
+<li>DEMO en vivo en https://</li>
+</ul>
+<hr>
+<hr>
+<h2>📋-CARACTERISTICAS:</h2>
+<ul>
+<li>Se han <strong>insertado comentarios</strong> a lo largo de todo el código explicando su funcionalidad, también se ha <strong>documentado</strong> las funciones utilizadas para explicar su uso, e incluso se ha creado este <strong>README</strong> y el <strong>api.md</strong>. También se ha incluido documentación en la carpeta <code>docs</code></li>
+<li>Se han respetado los estándares <code>HTML5</code></li>
+<li>Se han filtrado por seguridad los datos introducidos por el formulario en 3 capas distintas: <code>HTML, Javascript y PHP</code></li>
+<li>Se le ha dotado de un mínimo <code>CSS</code> para hacerla más amigable, responsive con mediaquery</li>
+<li>Se han utilizado <strong>etiquetas semánticas</strong> en el HTML</li>
+<li>Se ha incluido componentes comunes en HTML como el &quot;Breadcrumbs&quot; o el &quot;pié de página&quot;</li>
+<li>Se han utilizado distintos <code>eventos javascript</code> para controlar el formulario.</li>
+<li>Se ha intentado separar la <strong>lógica</strong> de la <strong>presentación</strong>.</li>
+<li>Se ha utilizado <strong>MySQL</strong> para crear y guardar los datos de los registros.</li>
+<li>Se han tratado de <em>forma segura los datos sensibles</em> de acceso a la <em>base de datos</em>, separándolos en directorios protegidos por un <code>.htaccess</code>.</li>
+<li>Preparado para <strong>LOCAL</strong> y <strong>ONLINE</strong></li>
+<li>Añadido un botón de descargas que bajará el proyecto completo en <strong>zip</strong></li>
+<li>Algún trabajo extra adicional como la <strong>optimización</strong> de las pocas imágenes que implementa, creación de un zip con el proyecto al completo.</li>
+<li>Se han realizado tests unitarios con <strong>jasmine</strong> pasando con <code>OK 51 Spec</code></li>
+<li>Unos <code>52 Kbts</code> de código en <code>public/</code> y <code>18 Kbts</code> en <code>src/</code> sin contar test, README ni imágenes.</li>
+<li>Por último todos los archivos de texto se han guardado con codificación estándar <code>UTF-8 no-BOM</code>.</li>
+</ul>
+<h2>🔧-ResumenDeUso</h2>
+<p>El archivo de entrada <code>index.html</code> muestra una pseudo-web que rerpresenta la parte <strong>administrativa</strong> de una supuesta empresa, donde se muestran dos formularios:</p>
+<ul>
+<li>Uno para dar de <strong>Alta</strong> y <strong>búsqueda</strong> de clientes.</li>
+<li>Otro que muestra el <strong>Listado</strong> (con botones de accción) de los clientes previamente registrados.</li>
+</ul>
+<p>Al dar de alta algún cliente (rellenando los campos obligatorios) se refrescará el listado de forma automática.
+Este formulario permite también la búsqueda por <code>nombre, apellidos e email</code> marcando el checkbox correspondiente. Los resultados se mostrarán en el listado, para volver a visualizarlos todos pulsar el botón de <code>Limpiar Búsqueda</code>.</p>
+<p>Todos los campos obligatorios se les pasa un control de validación para evitar datos introducidos de forma errónea (por ejemplo nombres con números o email no válidos) a través de <strong>javascript</strong>, aún así, en la parte servidor se vuelve a verificar la corrección de los datos con <strong>php</strong>.</p>
+<p>Tanto si las acciones se cumplen satisfactoriamente o no, se mostrará un pequeño mensaje en el pié del formulario.</p>
+<h2>⚙️-Desarrollo</h2>
+<p>No he podido dedicarle más que unas cuantas horas en estos 5 días por problemas familiares, así que no se podían hacer grandes cosas, pero he intentado cumplir lo solicitado en el PDF y que haya una muestra variada sobre programación de tecnologías web, tanto en local (con <strong>WamppServer</strong>) como en servidor, aplicando <em>buenas prácticas de programación</em>.</p>
+<p>La monté en <strong>local</strong> y tras sucesivos tests prueba-error me decidí a montarla también <strong>online</strong>.</p>
+<p>Para esto contraté un hosting en &quot;<em>infinityFree</em>&quot; y subí los mismos archivos que en local, sólo tube que realizar modificaciones en los datos de conexionado a la <em>BD</em> y algún pequeño ajuste más.</p>
+<p>Puede verse montada a modo de prueba en: <a href="https:%5C/%5C/appcrud.kesug.com/">https://appcrud.kesug.com/</a></p>
+<h2>DOCUMENTACION</h2>
+<p>Como se ha comentado anteriormente por encima todos los scripts tanto en <code>html, css, javascript como en php</code> tienen líneas de comontario explicando su funcionalidad, también se ha creado este <strong>README</strong> y el <strong>api.md</strong>. Como colofón final también se ha incluido documentación en la carpeta <code>docs</code>, esta documentación sobre los archivos php se ha incluido en la ruta: <code>/docs/api/index.html</code> la cual se ha generado con <code>phpDocumentor 3.8.1</code>.</p>
+<h2>💥-PruebasUnitarias</h2>
+<p>Ejecutadas pruebas unitarias con <strong>jasmine</strong> al código <em>js</em> a través del archivo <code>tests/jasmine/SpecRunner_validation.js.html</code>. Este script lo he preparado específicamente para este proyecto y
+verifica multitud de variaciones de entradas a los campos del formulario, tanto a &quot;Nombre&quot;, como a
+&quot;Apellidos&quot; y también a &quot;Email&quot;.</p>
+<blockquote>
+    <img class="mini-preview" src="./Jasmine-Spec-Runner.png" title="click for preview" onclick="this.classList.toggle('mini-preview'); this.classList.toggle('preview');" />
+</blockquote>
+<pre>Se han probado 51 casos de uso y todas las pruebas han resultado satisfactorias: <code>51 specs, 0 failures</code>.</pre>
+<h2>⌨️-Preview</h2>
+<blockquote>
+    <img class="mini-preview" src="./public/preview1.png" title="click for preview" onclick="this.classList.toggle('mini-preview'); this.classList.toggle('preview');" />
+    <img class="mini-preview" src="./public/preview2.png" title="click for preview" onclick="this.classList.toggle('mini-preview'); this.classList.toggle('preview');" />
+</blockquote>
+<h2>🚀-Aviso</h2>
+<pre>Esto sólo es una pequeña demostración, no una app real.</pre>
+<h2>✨-Mejoras</h2>
+<p>Podrían añadirse muchas mejoras, añadir más bloques de contenido, insertar etiquetas semánticas, hacerla responsive, mejorar el estilo y la maquetación, aplicar efectos CSS3, ...</p>
+<h2>🌍-Paquete</h2>
+<p>He creado un paquete comprimido en formato <strong>ZIP</strong> con todo el proyecto, esto puede implementarse tanto en LOCAL como en SERVER, pero hay que detenerse en el archivo <code>bd_config.php</code> y establecer los datos correctos de conexionado con la Base de Datos.</p>
+<p>Para este proyecto a mí me han servido los datos que están registrados en ese archivo, pero al trasladar el proyecto a otros PC / SERVERs habría que modificarlos.</p>
+<p>También se ha insertado en la propia web (en el pié de la página principal) un <strong>botón de descarga</strong> del proyecto en su totalidad.</p>
+<h2>🎁-Agradecimientos:</h2>
+<p>... Muchas gracias a todos los que hacen código libre por desarrollar herramientas superútiles para todos; esta vez también a <em>Microsoft</em> por su <abbr title="Visual Studio Code">VSC</abbr> que me ha facilitado y acelerado el trabajo del desarrollo en local, .. y en general a todo el mundo altruista que genera código y lo dispone open-source.</p>
+<p>Por supuesto muchísimas gracias también a los asesores que he tenido durante la etapa de <strong>Asesoramiento</strong> en las Certificaciones que me han ayudado y aconsejado, y con antelación, también a mis futuros <strong>Examinadores</strong> por su interés en contactarme y facilitarme la presentación y exposición de mis trabajos y experiencia laboral.</p>
+<h2>✒️-Credits:</h2>
+<p>2025 - <a href="mailto:dinertron@gmail.com">GuerraTron-25</a> ® <a href="https://guerratron.github.io/">GuerraTron Github</a></p>
+<hr>
+<p>⌨️ con ❤️ por <a href="https://github.com/guerratron.github.io">Juan José Guerra</a> 😊</p>
+<p><a href="#top"><b style="font-size:xx-large; margin-left:50%;" title="ir al inicio">🔝</b></a></p>
+<!-- REFERENCIAS --></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ClientsAPI_ClientsAPI.html">ClientsAPI</a></li><li><a href="Field_Field.html">Field</a></li><li><a href="Registro_Registro.html">Registro</a></li><li><a href="Table.html">Table</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_BD_FIELDS">_BD_FIELDS</a></li><li><a href="global.html#_JSON_DEFAULT1">_JSON_DEFAULT1</a></li><li><a href="global.html#_check">_check</a></li><li><a href="global.html#_formData2json">_formData2json</a></li><li><a href="global.html#_getElementByVal">_getElementByVal</a></li><li><a href="global.html#_isEmailOK">_isEmailOK</a></li><li><a href="global.html#_isOK">_isOK</a></li><li><a href="global.html#_isTxtOK">_isTxtOK</a></li><li><a href="global.html#_json2QueryString">_json2QueryString</a></li><li><a href="global.html#_json2formData">_json2formData</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Fri Nov 14 2025 16:44:20 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

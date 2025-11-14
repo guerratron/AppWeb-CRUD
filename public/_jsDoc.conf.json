@@ -1,0 +1,83 @@
+{
+  "package": {
+      "name": "AppWebCRUDv03",
+      "version": "0.3.0",
+      "description": "Gestor de clientes (CRUD) v0.3.0. Aplicación mínima para alta, baja, modificación y listado de clientes en MySQL",
+      "author": "Juan Jose Guerra Haba - GuerraTron25",
+      "email": "dinertron@gmail.com",
+      "keywords": ["web", "crud", "js", "php", "mysql"],
+      "license": "BSD-3-Clause | GPL v3.0",
+      "main"        : "public/api.js"
+  },
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries"    : ["jsdoc","closure"]
+  },
+  "source": {
+    "include"         : ["public/*.js"],
+    "exclude"         : ["static/*.*",
+                         "help/*.*",
+                         "doc/*.*",
+                         "img/*.*",
+                         "examples/*.*",
+                         "tutorial/*.*",
+                         "NO-VALE/*.*",
+                         "PRUEBAS/*.*",
+                         ".git/*.*",
+                         ".vscode/*.*",
+                         ".phpdoc/*.*",
+                         "node_modules/*.*",
+                         "docs/*.*",
+                         "jsdoc-templates/*.*",
+                         "src/*.*",
+                         "test/*.*"],
+    "includePattern"  : ".+\\.js(doc)?$",
+    "excludePattern"  : "(^|\\/|\\\\)_"
+  },
+  "sourceType": "module",
+  "recurseDepth": 8,
+  "plugins": [
+    "plugins/markdown",
+    "plugins/summarize"
+  ],
+  "templates": {
+    "dateFormat"      : "ddd MMM Do YYYY",
+    "applicationName" : "AppWebCRUDv03",
+    "systemName"      : "AppWebCRUDv03 :: Gestor de clientes (CRUD) v0.3.0 - by GUERRATRON",
+    "cleverLinks"     : false,
+    "monospaceLinks"  : true,
+    "default"         : {
+      "layoutFile"        : "",
+      "outputSourceFiles" : true,
+      "includeDate"       : true,
+      "useLongnameInNav"  : false
+    },
+    "debug"           : true,
+    "logoFile"        : "public/logo_mini.png",
+    "logoLink"        : "https://github.com/guerratron/AppWeb-CRUD",
+    "responsive"      : true,
+    "author"          : "<a href='mailto:dinertron@gmail.com' title='author'>GuerraTron</a>",
+    "footer"          : "$HR$ Documentación generada por $AUTHOR$ en $DATE$ $BR$ $COPYRIGHT$ $HR$",
+    "copyright"       :  "Juan Jose Guerra Haba (c) 2025",
+    "theme"           : "dark",
+    "changeTheme"     : true,
+    "totop"           : true,
+    "meta"            : {
+      "title"           : "AppWebCRUDv03 :: Gestor de clientes (CRUD) v0.3.0 - by GUERRATRON",
+      "description"     : "Aplicación mínima para alta, baja, modificación y listado de clientes en MySQL",
+      "keywords"        : ["web", "crud", "js", "php", "mysql"],
+      "charset"         : "utf-8",
+      "language"        : "es"
+    }
+  },
+  "opts": {
+    "encoding"    : "utf8",
+    "destination" : "./docs/js/",
+    "recurse"     : true,
+    "readme"      : "./README.md",
+    "template"    : "./jsdoc-templates/doctron",
+    "query"       : "value",
+    "private"     : false,
+    "lenient"     : true
+  }
+}
