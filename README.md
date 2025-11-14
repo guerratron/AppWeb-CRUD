@@ -19,6 +19,7 @@
 - [📋 Características](#📋-caracteristicas)
 - [🔧 Resumen De Uso](#🔧-resumendeuso)
 - [⚙️ Desarrollo](#⚙️-desarrollo)
+- [📖 Documentación](#📖-documentacion)
 - [💥 Pruebas Unitarias](#💥-pruebasunitarias)
 - [⌨️ Preview](#⌨️-preview)
 - [🚀 Aviso](#🚀-aviso)
@@ -73,6 +74,8 @@ Se ha separado la estructura en dos carpetas:
      También contiene otros archivos como un mínimo de imágenes. 
  - `src/` : Aquí va todo el código que administra el servidor, controla los verbos **CRUD** para la base  
     de datos y algún archivo de utilidad. Todo son archivos **php**
+ - `test`: Esta carpeta no cuenta, es sólo para uso interno, no es necesaria en el lanzamiento. Aquí residen los test de pruebas unitarias realizados con **jasmine**
+ - `docs`: documentación de la **API**
 
 ## Control_de_Versiones
 ### Tag (etiquetas de version) y release notes (notas de versión):  
@@ -101,21 +104,21 @@ v0.3.0
 -----------
 
 ## 📋-CARACTERISTICAS:
- - Se han **insertado comentarios** a lo largo de todo el código explicando su funcionalidad, también se ha **documentado** las funciones utilizadas para explicar su uso, e incluso se ha creado este **README**
+ - Se han **insertado comentarios** a lo largo de todo el código explicando su funcionalidad, también se ha **documentado** las funciones utilizadas para explicar su uso, e incluso se ha creado este **README** y el **api.md**. También se ha incluido documentación en la carpeta `docs`
  - Se han respetado los estándares `HTML5`
  - Se han filtrado por seguridad los datos introducidos por el formulario en 3 capas distintas: `HTML, Javascript y PHP`
- - Se le ha dotado de un mínimo `CSS` para hacerla más amigable
+ - Se le ha dotado de un mínimo `CSS` para hacerla más amigable, responsive con mediaquery
  - Se han utilizado **etiquetas semánticas** en el HTML
  - Se ha incluido componentes comunes en HTML como el "Breadcrumbs" o el "pié de página"
  - Se han utilizado distintos `eventos javascript` para controlar el formulario.
  - Se ha intentado separar la **lógica** de la **presentación**.
- - Se ha utilizado **MySQL** para crear y guardar los datos de las suscripciones.
+ - Se ha utilizado **MySQL** para crear y guardar los datos de los registros.
  - Se han tratado de *forma segura los datos sensibles* de acceso a la *base de datos*, separándolos en directorios protegidos por un `.htaccess`.
- - También se ha **cifrado** los datos introducidos por el usuario para evitar robo de datos.
  - Preparado para **LOCAL** y **ONLINE**
  - Añadido un botón de descargas que bajará el proyecto completo en **zip**
  - Algún trabajo extra adicional como la **optimización** de las pocas imágenes que implementa, creación de un zip con el proyecto al completo.
- - Unos `52 Kbts` de código en `public/` y `18 Kbts` en `src/` sin contar README ni imágenes.
+ - Se han realizado tests unitarios con **jasmine** pasando con `OK 51 Spec`
+ - Unos `52 Kbts` de código en `public/` y `18 Kbts` en `src/` sin contar test, README ni imágenes.
  - Por último todos los archivos de texto se han guardado con codificación estándar `UTF-8 no-BOM`.
 
 ## 🔧-ResumenDeUso
@@ -125,6 +128,8 @@ El archivo de entrada `index.html` muestra una pseudo-web que rerpresenta la par
 
 Al dar de alta algún cliente (rellenando los campos obligatorios) se refrescará el listado de forma automática.
 Este formulario permite también la búsqueda por `nombre, apellidos e email` marcando el checkbox correspondiente. Los resultados se mostrarán en el listado, para volver a visualizarlos todos pulsar el botón de `Limpiar Búsqueda`.
+
+Todos los campos obligatorios se les pasa un control de validación para evitar datos introducidos de forma errónea (por ejemplo nombres con números o email no válidos) a través de **javascript**, aún así, en la parte servidor se vuelve a verificar la corrección de los datos con **php**.
 
 Tanto si las acciones se cumplen satisfactoriamente o no, se mostrará un pequeño mensaje en el pié del formulario.
 
@@ -138,16 +143,21 @@ Para esto contraté un hosting en "*infinityFree*" y subí los mismos archivos q
 
 Puede verse montada a modo de prueba en: <https://appcrud.kesug.com/>
 
+## 📖-DOCUMENTACION
+Como se ha comentado anteriormente por encima todos los scripts tanto en `html, css, javascript como en php` tienen líneas de comentario explicando su funcionalidad, también se ha creado este **README** y el **api.md**. Como colofón final también se ha incluido documentación en la carpeta `docs`, esta documentación sobre los archivos php se ha incluido en la ruta: `/docs/api/index.html` la cual se ha generado con `phpDocumentor 3.8.1`.
+
+También se ha documentado el código de las clases js creadas, se encuentra todo en la carpeta `docs/js/index.html`, todo ello generado con `jsDoc`.
+
 ## 💥-PruebasUnitarias
 Ejecutadas pruebas unitarias con **jasmine** al código *js* a través del archivo `tests/jasmine/SpecRunner_validation.js.html`. Este script lo he preparado específicamente para este proyecto y 
 verifica multitud de variaciones de entradas a los campos del formulario, tanto a "Nombre", como a 
-"Apellido" y también a "Email".
+"Apellidos" y también a "Email".
 
 <blockquote>
     <img class="mini-preview" src="./Jasmine-Spec-Runner.png" title="click for preview" onclick="this.classList.toggle('mini-preview'); this.classList.toggle('preview');" />
 </blockquote>
 
-<p class="alert green">Se han probado 51 casos de uso y todas las pruebas han resultado satisfactorias: <code>51 specs, 0 failures</code>.</p>
+<pre>Se han probado 51 casos de uso y todas las pruebas han resultado satisfactorias: <code>51 specs, 0 failures</code>.</pre>
 
 ## ⌨️-Preview
 

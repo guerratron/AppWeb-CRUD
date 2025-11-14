@@ -21,7 +21,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = "JJJuan";//$_POST['nombre'];
     $id = isset($_POST['id']) ? $_POST["id"] : "?";
     echo "Hola, " . $nombre . "! Tienes " . $id . " años. La queryString ha sido: " . $_GET["action"];
-} */
+} 
+C:\>php.exe "C:\Path\To\phpdoc" -t targetdir -o HTML:default:default -d parsedir
+*/
 
 /** HEADERS AND CORS */
 header('Content-Type: application/json');

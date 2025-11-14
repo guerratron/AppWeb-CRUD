@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Field.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Field.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+/* Field - by GuerraTron-25, 
+ * Crea un Field de un Registro de la BD, asociado a un elemento HTML. 
+   let field1 = new Field("#elem", 4, 3, {type: "string", background: "#4CAF50"}); "*/
+export class Field{
+    static contador = 0; //variable estática
+
+    lastValue = "";
+    
+    //CLASE PRINCIPAL
+    /** Crea un Field de un Registro de la BD, asociado a un elemento HTML.
+     * Se supone que el _parent será un objeto "Registro" que contendrá un elmento "tr" 
+     * de una tabla al que se le entregará como hijo el elemento (this.el) creado por esta 
+     * clase [un elemento "td"]
+     * 
+     * Utiliza el objeto VAL del script "validation.js", debe estar cargado con anterioridad
+     */
+    constructor(_parent, _name, _value, _options){
+        this.parent = _parent;
+        this.container = _parent.el;
+        this.name = _name || "";
+        this.value = (typeof _value) == "undefined" ? "": _value;
+        
+        this.options = Object.assign({
+            type: "text",
+            style: "",   //["red", "green", "blue", "gray", "black", "yellow", "purple", "pastel"]
+            enable: true,
+            id: Field.contador++
+        }, _options || {});
+        this.id = this.options.id;
+        this.type = this.options.type;
+        this.enable = this.options.enable;
+
+
+        if (["nombre", "apellido1", "apellido2", "email"].includes(this.name)) {
+            this.value = VAL.check(this.name, _value);
+            if(!this.value){
+                alert(`necesita introducir un valor válido para "${this.name}" =  "${this.value}" del registro "${this.id}"`);
+            }
+        }
+        this.lastValue = this.value;
+        
+        this.el = this.makeStructure();
+    }
+
+    /** Realiza la estructura principal de la Field. */
+    makeStructure(){
+        // TODO: debería borrar también eventos para liberar memoria
+        if(this.el){ this.container.removeChild(this.el); }
+        this.el = document.createElement("td");
+        this.el.classList.add("field-td");
+            this.input = document.createElement("input");
+            this.input.classList.add("field-input");
+            this.input.type = this.type;
+            this.input.value = this.value;
+            this.input.title = this.name;
+            this.input.enable = this.enable;
+            if(this.options.style){ this.input.setAttribute("style", this.options.style); }
+            
+            this.input.style.width = "98%";
+            if (this.name == "id") {
+                this.input.style.width = "33%";
+            }
+            if (this.name == "telefono") {
+                this.input.style.width = "65%";
+            }
+            this.input.addEventListener("change", ()=>{
+                // se difieren las acciones para no ralentizar el evento "change"
+                setTimeout(()=>{
+                    if (["nombre", "apellido1", "apellido2", "email"].includes(this.name)) {
+                        this.value = VAL.check(this.name, this.input.value);
+                        if (!this.value) {
+                            alert(`Valor para "${this.name}" del registro "${this.id}" NO VÁLIDO!`);
+                            this.input.value = this.lastValue;
+                        }
+                    }
+                    this.value = this.input.value;
+                    this.lastValue = this.value;
+                }, 200);
+            });
+            this.input.addEventListener("focus", () => {
+                this.input.classList.add("field-input-selected");
+            });
+            this.input.addEventListener("blur", () => {
+                this.input.classList.remove("field-input-selected");
+            });
+        this.el.appendChild(this.input);
+        this.container.appendChild(this.el);
+        this.update();
+        return this.el;
+    };
+
+    setEnable(trueFalse) {
+        this.enable = trueFalse;
+        this.input.disabled = !trueFalse;
+        if(trueFalse){ this.input.classList.add("enabled"); }else { this.input.classList.remove("enabled"); }
+        this.update();
+    }
+    /** Se borrará el valor que se haya establecido en este elemento. */
+    clean(){
+        this.value = "";
+        this.input.value = "";
+        this.update();
+    };
+
+    update(){
+        //this.callbackUpdate();
+        //console.log(" 'Field_" + this.id + "' UPDATED!!");
+    };
+
+}
+
+//window["Field"] = Field;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ClientsAPI_ClientsAPI.html">ClientsAPI</a></li><li><a href="Field_Field.html">Field</a></li><li><a href="Registro_Registro.html">Registro</a></li><li><a href="Table.html">Table</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_BD_FIELDS">_BD_FIELDS</a></li><li><a href="global.html#_JSON_DEFAULT1">_JSON_DEFAULT1</a></li><li><a href="global.html#_check">_check</a></li><li><a href="global.html#_formData2json">_formData2json</a></li><li><a href="global.html#_getElementByVal">_getElementByVal</a></li><li><a href="global.html#_isEmailOK">_isEmailOK</a></li><li><a href="global.html#_isOK">_isOK</a></li><li><a href="global.html#_isTxtOK">_isTxtOK</a></li><li><a href="global.html#_json2QueryString">_json2QueryString</a></li><li><a href="global.html#_json2formData">_json2formData</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Fri Nov 14 2025 16:44:20 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -22,7 +22,13 @@ table.table-matriz, table.table-matriz th, table.table-matriz td{
 table.table-matriz input{
     height: 25px;
     border: 1px solid orange;
-    font-size: smaller;
+}
+@media (max-width: 50em) {
+    table.table-matriz input{
+        height: 25px;
+        border: 1px solid orange;
+        font-size: smaller;
+    }
 }
 table.table-matriz tr{
     height: 25px;
