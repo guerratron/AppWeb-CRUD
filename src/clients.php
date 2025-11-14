@@ -50,7 +50,7 @@ $getAction = isset($_GET["action"]) ? htmlspecialchars($_GET["action"]) : "";
 // 2.- CONFIGURACIÓN: nombre de la base, del usuario, clave y servidor
 require_once './bd_config.php'; //ESTE SCRIPT DEBERÍA ESTAR FUERA DEL ALCANCE DE LA WEB PÚBLICA
 // a partir de aquí ya existe el objeto PDO y $regs contiene el objeto con todos los registros hasta ahora
-// también existe la función _toResults();
+// también existe la función _toResults() y _restoreIds();
 
 switch($getAction){
     case "del":
@@ -105,12 +105,18 @@ switch($getAction){
         try{
             // Preparar la consulta SQL con marcadores de posición (?), 
             // en función de la búsqueda por nombre, apellido o email se formará distinta la consulta
+            //$pNombre, $pApellido1, $pApellido2, $pEmail;
+            
             $sql = "SELECT * FROM $db_table_name WHERE ";
             $post_sql = "";
-            $post_sql .= $postNombre ? "nombre=?" : "";
-            $post_sql .= $postApellido1 ? ($postNombre ? " AND " : "") . "apellido1=?" : "";
-            $post_sql .= $postApellido2 ? ($postApellido1 ? " AND " : "") . "apellido2=?" : "";
-            $post_sql .= $postEmail ? ($postApellido2 ? " AND " : "") . "email=?" : "";
+            $arr = ["nombre" => $postNombre, "apellido1" => $postApellido1, "apellido2" => $postApellido2, "email" => $postEmail];
+            foreach ($arr as $key => $value) {
+                if($value){
+                    $post_sql .= "$key=? AND ";
+                }
+            }
+            $post_sql = substr($post_sql, 0, -4);
+            
             $post_sql =  !$post_sql ? "TRUE" : "(" . $post_sql . ")";
             $sql .= $post_sql;
             // Vincular parámetros (s=string)
@@ -123,7 +129,8 @@ switch($getAction){
             $stmt->execute($arr); //array($postNombre, $postApellido1, $postApellido2, $postEmail)
             $regs = $stmt->fetchAll(PDO::FETCH_OBJ);
             //_toResults(); //refresh
-            $result = array("regs"=>$regs, "error" => $sql);
+            $_count = $stmt->rowCount();
+            $result = array("regs"=>$regs, "error" => "$_count Registros encontrados");//$sql);
         }catch(PDOException $e){
             $result = array("regs"=>array(), "error" => "NO SE ENCUENTRA! Ningún registro con esos datos!\n");// . $sql);
         }
@@ -140,7 +147,11 @@ switch($getAction){
         }catch(PDOException $e){
             $result = array("regs"=>$regs, "error" => "ERROR! Posible Tabla Vacía (EMPTY)");
         }
+
+        break;
     default:
+        $result = array("regs" => [], "error" => "ERROR! BAD-ACTION");
+        //die('Error: BAD-ACTION');
 }
 
 

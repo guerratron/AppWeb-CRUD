@@ -20,6 +20,8 @@ const _JSON_DEFAULT1 = {
         {id: 2, nombre: "Juan José", apellido1: "Guerra", apellido2: "Haba", telefono: "11223344", email: "dinertron@gmail.com", notas: "ADMIN"}
     ]
 };
+const _INSERT_REQUIRED_VALUES = ["nombre", "apellido1", "apellido2", "email"];
+const _SEARCH_REQUIRED_VALUES = []; //"email"]"nombre", "apellido1", "apellido2", 
 
 /* ClientsAPI - by GuerraTron-25, 
  * Se encarga de toda la lógica de la página y la comunicación con el server */
@@ -61,6 +63,7 @@ export class ClientsAPI{
         }, _options || {});
         this.json = this.options.json;
         this.formAdd = this.options.formAdd;
+        //CONTROLA EL FORMULARIO EXTERNO
         if(this.formAdd){
             this.chkSearch = this.formAdd.chkSearch;
             this.chkSearch.addEventListener("change", (ev) => {
@@ -94,16 +97,21 @@ export class ClientsAPI{
             });
             //return false;
             Array.from(this.formAdd.elements).forEach((f)=>{
-                if(["nombre", "apellido1", "apellido2", "email"].includes(f.id)){
+                let required = this.chkSearch.checked ? _SEARCH_REQUIRED_VALUES : _INSERT_REQUIRED_VALUES;
+                if (required.includes(f.id)) {
                     f.addEventListener("change", () => {
+                        let required2 = this.chkSearch.checked ? _SEARCH_REQUIRED_VALUES : _INSERT_REQUIRED_VALUES;
                         // se difieren las acciones para no ralentizar el evento "change"
-                        setTimeout(() => {
-                            let value = VAL.check(f.id, f.value);
-                            if (!value) {
-                                alert(`💥 Valor para "${this.name}" NO VÁLIDO!`);
-                                f.value = "";
-                            }
-                        }, 200);
+                        if (required2.includes(f.id)) {
+                            setTimeout(() => {
+                                let value = VAL.check(f.id, f.value);
+                                if (!value) {
+                                    alert(`💥 Valor para "${f.name}" NO VÁLIDO!`);
+                                    f.value = "";
+                                    if(f.name == "email"){ location.href = "404.html"; }
+                                }
+                            }, 200);
+                        }
                     });
                 }
             });
@@ -115,7 +123,8 @@ export class ClientsAPI{
                 ev.preventDefault();
                 let _stop = false;
                 Array.from(this.formAdd.elements).forEach((f) => {
-                    if (["nombre", "apellido1", "apellido2", "email"].includes(f.id)) {
+                    let required = this.chkSearch.checked ? _SEARCH_REQUIRED_VALUES : _INSERT_REQUIRED_VALUES;
+                    if (required.includes(f.id)) {
                         if(!f.value){ _stop = true; }
                     }
                 });
@@ -123,7 +132,7 @@ export class ClientsAPI{
                     console.log("se envía a Ajax añadiendole la queryString");
                     const datosFormulario = new FormData(this.formAdd);
                     if (this.chkSearch.checked) {
-                        console.log(this.datosFormulario, UTILS.formData2json(datosFormulario));
+                        //console.log(this.datosFormulario, UTILS.formData2json(datosFormulario));
                         this.setSearch(UTILS.formData2json(datosFormulario));
                     } else { //`${this.formAdd.action}?action=insert`
                         this.setInsert(UTILS.formData2json(datosFormulario));
@@ -157,13 +166,13 @@ export class ClientsAPI{
 
     /** recibe la respuesta de la llamada AJAX y actualiza los registros (o los recrea) de la Tabla */
     update(arrJson = []){
-        if(arrJson.length > 0){
+        //if(arrJson.length > 0){
             this.table.reset(); //la resetea y recrea para quedarla limpia
             arrJson.forEach((reg)=>{
                 //console.log(reg);
                 this.table.addReg(reg);
             });
-        }
+        //}
     }
 
     /** Obtiene el registro para actualizar en el formato json:  
@@ -195,7 +204,7 @@ export class ClientsAPI{
         let result = confirm(`✒️ ACTUALIZAR REGISTRO ❗ ❕\n\n Desea actualizar el registro con 'id=${json.id}' ❓❓`);
         if (result) {
             console.log(`OK, orden de actualizar el registro con 'id=${json.id}'`, result);
-            this.setAJAX(`${this.baseUrlSend}clients.php?action=update&`, newJson);
+            this.setAJAX(`update`, newJson);
         } else {
             console.log(`Actualización del registro con 'id=${json.id}' CANCELADA !`);
             this.setMsg(`Actualización del registro con 'id=${json.id}' CANCELADA !`);
@@ -207,7 +216,7 @@ export class ClientsAPI{
         this.loading.classList.remove("hidden");
         console.log(`OK, orden de listar todos los registros de la BD`);
         this.setMsg(`OK. Listado de Clientes en proceso..`);
-        this.setAJAX(`${this.baseUrlSend}clients.php?action=list&`, {});
+        this.setAJAX(`list`, {});
     }
     /** necesita 4 campos: nombre, apellido1, apellido2 y email */
     setSearch(json) {
@@ -216,7 +225,7 @@ export class ClientsAPI{
         console.log("Search Regs");
         console.log(`OK, orden de buscar todos los clientes que cumplan la condición`, json);
         this.setMsg(`OK. Realizándose busqueda..`);
-        this.setAJAX(`${this.baseUrlSend}clients.php?action=search&`, json);
+        this.setAJAX(`search`, json);
     }
     /** INSERTAR */
     setInsert(json) {
@@ -227,12 +236,12 @@ export class ClientsAPI{
         }
         //console.log("Delete Reg: " + id + " ?");
         let result = confirm(`🚀 INSERTAR REGISTRO \n\n Insertar un nuevo registro ❓❓`);
-        console.log("Result: ", result);
+        //console.log("Result: ", result);
         if (result) {
             console.log(`OK, orden de insertar un nuevo registro`, result);
             this.setMsg(`OK. Insertar en proceso..`);
             //this.setAJAX(`${this.baseUrlSend}clients.php?action=del&`, json);
-            this.setAJAX(`${this.baseUrlSend}clients.php?action=insert&`, json);
+            this.setAJAX(`insert`, json);
         } else {
             console.log(`Nuevo Registro CANCELADO !`);
             this.setMsg(`Nuevo Registro CANCELADO !`)
@@ -244,10 +253,10 @@ export class ClientsAPI{
         this.loading.classList.remove("hidden");
         //console.log("Delete Reg: " + id + " ?");
         let result = confirm(`💣 ELIMINAR REGISTRO ❗ ❕\n\n Seguro que desea eliminar el registro con 'id=${id}' ❓❓`);
-        console.log("Result: ", result);
+        //console.log("Result: ", result);
         if(result){
             console.log(`OK, orden de eliminar el registro con 'id=${id}'`, result);
-            this.setAJAX(`${this.baseUrlSend}clients.php?action=del&`, {"id": id});
+            this.setAJAX(`del`, {"id": id});
             //this.setAJAX(`${this.baseUrlSend}clients.php?action=${action}&`, json);
         }else{
             console.log(`Elimnación del registro con 'id=${id}' CANCELADA !`);
@@ -256,12 +265,16 @@ export class ClientsAPI{
     }
 
     setMsg(msg, style = "background: whiteSmoke; color: #333;") {
-        this.loading.classList.add("hidden");
-        this.table.setMsg(msg, style);
+        //diferimos el mensaje
+        setTimeout(()=>{
+            this.loading.classList.add("hidden");
+            this.table.setMsg(msg, style);
+        }, 200);
     }
 
     /** Solicitud a través de AJAX a la dirección proporcionada, con respuesta asíncrona. */
-    setAJAX(url, json = {}){
+    setAJAX(action, json = {}){
+        let url = `${this.baseUrlSend}clients.php?action=${action}&`;
         console.log("1.Enviando a: " + url, json);
         url += (/\?/.test(url) ? "&" : "?") + new Date().getTime();//permite saltar la caché
         let _this = this;
@@ -271,7 +284,7 @@ export class ClientsAPI{
         xhttp.onloadend = function(){ //en este caso mejor que las funciones flecha (no pierde el scope)
             if (this.readyState == 4) {
                 if (this.status == 200) {
-                    console.log(this.response, this.responseType);//JSON.parse(this.responseText));
+                    console.log(":RESPONSE:", this.response, this.responseType);//JSON.parse(this.responseText));
                     let style = "background: aquamarine; color: darkGreen;";
                     if(this.response.error){
                         style = "background: yellow; color: red;";
@@ -304,7 +317,7 @@ export class ClientsAPI{
         // application/x-www-form-urlencoded'); //'application/json; charset=utf-8');
         xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');//para queryString
         //xhttp.send(UTILS.json2formData(json));
-        console.log(json, UTILS.json2QueryString(json));
+        //console.log(json, UTILS.json2QueryString(json));
         xhttp.send(UTILS.json2QueryString(json)); //funciona mejor con el típico queryString
     }
 
