@@ -238,7 +238,7 @@ export class Table{
         this.regs.forEach((reg) => {
             reg.update();
         });
-        console.log(" 'Table_" + this.id + "' UPDATED!!");
+        //console.log(" 'Table_" + this.id + "' UPDATED!!");
     };
 
 
