@@ -7,10 +7,10 @@
     by Juanjo Guerra - GuerraTron25 - 05-11-25
 */
 // Nombre del archivo a descargar
-$nombreArchivo = 'Suscribe.zip';
+$nombreArchivo = 'AppWebCRUDv0.4.0.zip';
 
 // Ruta completa al archivo en el servidor
-$rutaArchivo = 'donwloads/Suscribe.zip'; // Asegúrate de que esta ruta sea correcta
+$rutaArchivo = '../downloads/AppWebCRUDv0.4.0.zip'; // Asegúrate de que esta ruta sea correcta
 
 // 1. Configurar cabeceras para la descarga
 header('Content-Description: File Transfer');

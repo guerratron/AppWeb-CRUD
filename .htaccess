@@ -6,6 +6,10 @@
 #
 ##################################################
 
+php_value display_errors Off
+php_value mbstring.http_input auto
+php_value date.timezone Europe/Madrid
+
 # Bloquear acceso a este mismo archivo
 #<Files .htaccess>
 #order allow,deny

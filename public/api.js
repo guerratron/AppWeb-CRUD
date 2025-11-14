@@ -16,7 +16,8 @@ import {Table} from "./Table.js"
 const _JSON_DEFAULT1 = {
     regs: [
         {id: 0, nombre: "Angélica", apellido1: "García", apellido2: "López", telefono: "600000001", email: "angelica@dominio.com", notas: "Cliente inicial"},
-        {id: 1, nombre: "Aniceto", apellido1: "Cáceres", apellido2: "Díaz", telefono: "600000002", email: "aniceto@dominio.com", notas: "VIP"}
+        {id: 1, nombre: "Aniceto", apellido1: "Cáceres", apellido2: "Díaz", telefono: "600000002", email: "aniceto@dominio.com", notas: "VIP"},
+        {id: 2, nombre: "Juan José", apellido1: "Guerra", apellido2: "Haba", telefono: "11223344", email: "dinertron@gmail.com", notas: "ADMIN"}
     ]
 };
 
@@ -26,7 +27,8 @@ export class ClientsAPI{
     "use strict";
 
     static contador = 0; //variable estática
-
+    //antes de nada corregir el puerto vacío
+    baseUrlSend = `${protocol + "://" + host + (port ? (":" + port) : "")}/${path}`;
     btnSubmit;
     chkSearch;
     btnClean;
@@ -106,7 +108,7 @@ export class ClientsAPI{
                 }
             });
             // route + submit
-            this.formAdd.action = `${protocol}://${host}:${port}/${path}clients.php`;//?action=add&`;
+            this.formAdd.action = `${this.baseUrlSend}clients.php`;//?action=add&`;
             this.btnSubmit = this.formAdd.submit;
             this.btnSubmit.addEventListener("click", (ev) => {
                 ev.stopPropagation();
@@ -193,7 +195,7 @@ export class ClientsAPI{
         let result = confirm(`✒️ ACTUALIZAR REGISTRO ❗ ❕\n\n Desea actualizar el registro con 'id=${json.id}' ❓❓`);
         if (result) {
             console.log(`OK, orden de actualizar el registro con 'id=${json.id}'`, result);
-            this.setAJAX(`${protocol}://${host}:${port}/${path}clients.php?action=update&`, newJson);
+            this.setAJAX(`${this.baseUrlSend}clients.php?action=update&`, newJson);
         } else {
             console.log(`Actualización del registro con 'id=${json.id}' CANCELADA !`);
             this.setMsg(`Actualización del registro con 'id=${json.id}' CANCELADA !`);
@@ -205,7 +207,7 @@ export class ClientsAPI{
         this.loading.classList.remove("hidden");
         console.log(`OK, orden de listar todos los registros de la BD`);
         this.setMsg(`OK. Listado de Clientes en proceso..`);
-        this.setAJAX(`${protocol}://${host}:${port}/${path}clients.php?action=list&`, {});
+        this.setAJAX(`${this.baseUrlSend}clients.php?action=list&`, {});
     }
     /** necesita 4 campos: nombre, apellido1, apellido2 y email */
     setSearch(json) {
@@ -214,7 +216,7 @@ export class ClientsAPI{
         console.log("Search Regs");
         console.log(`OK, orden de buscar todos los clientes que cumplan la condición`, json);
         this.setMsg(`OK. Realizándose busqueda..`);
-        this.setAJAX(`${protocol}://${host}:${port}/${path}clients.php?action=search&`, json);
+        this.setAJAX(`${this.baseUrlSend}clients.php?action=search&`, json);
     }
     /** INSERTAR */
     setInsert(json) {
@@ -229,8 +231,8 @@ export class ClientsAPI{
         if (result) {
             console.log(`OK, orden de insertar un nuevo registro`, result);
             this.setMsg(`OK. Insertar en proceso..`);
-            //this.setAJAX(`${protocol}://${host}:${port}/${path}clients.php?action=del&`, json);
-            this.setAJAX(`${protocol}://${host}:${port}/${path}clients.php?action=insert&`, json);
+            //this.setAJAX(`${this.baseUrlSend}clients.php?action=del&`, json);
+            this.setAJAX(`${this.baseUrlSend}clients.php?action=insert&`, json);
         } else {
             console.log(`Nuevo Registro CANCELADO !`);
             this.setMsg(`Nuevo Registro CANCELADO !`)
@@ -245,8 +247,8 @@ export class ClientsAPI{
         console.log("Result: ", result);
         if(result){
             console.log(`OK, orden de eliminar el registro con 'id=${id}'`, result);
-            this.setAJAX(`${protocol}://${host}:${port}/${path}clients.php?action=del&`, {"id": id});
-            //this.setAJAX(`${protocol}://${host}:${port}/${path}clients.php?action=${action}&`, json);
+            this.setAJAX(`${this.baseUrlSend}clients.php?action=del&`, {"id": id});
+            //this.setAJAX(`${this.baseUrlSend}clients.php?action=${action}&`, json);
         }else{
             console.log(`Elimnación del registro con 'id=${id}' CANCELADA !`);
             this.setMsg(`Elimnación del registro con 'id=${id}' CANCELADA !`)

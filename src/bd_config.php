@@ -104,7 +104,8 @@ try {
         // MÍNIMO, 2 NUEVOS REGISTRO DE EJEMPLO
         $sql = "INSERT INTO $db_table_name (nombre, apellido1, apellido2, email, telefono, notas) VALUES 
         ('Angélica', 'García', 'López', 'angelica@dominio.com', '600000001', 'Cliente inicial'), 
-        ('Aniceto', 'Cáceres', 'Díaz', 'aniceto@dominio.com', '600000002', 'VIP')";
+        ('Aniceto', 'Cáceres', 'Díaz', 'aniceto@dominio.com', '600000002', 'VIP'), 
+        ('Juan José', 'Guerra', 'Haba', 'dinertron@gmail.com', '11223344', 'ADMIN')";
         $stmt = $pdo->prepare($sql);
         //$stmt->bindParam(':db_table_name', $db_table_name, PDO::PARAM_STR);//PDO::PARAM_INT);
         $result = $stmt->execute();
